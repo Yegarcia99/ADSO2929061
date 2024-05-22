@@ -98,9 +98,50 @@ body{
         }
         img {
             border-radius: 50%;
+        
             border: 10px solid var(--color-1);
             width: 240px;
         }
+     }
+     menu {
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+        a:is(:link, :visited){ 
+            align-items: center;
+            border-radius: 8px;
+            color: var(--COLOR-1);
+            background: var(--COLOR-2);
+            display: flex;
+            text-decoration: none;
+            gap: 1rem;
+            justify-content: start;
+            transition: all 0.4 ease-in;
+            align-items: center;
+            width: 280px;
+            span {
+                border-radius: 3px;
+                background-color: rgb(56, 55, 55);
+                display: flex;
+                justify-content: center;
+                font-size: 1.2rem;
+                align-items: center;
+                color: floralwhite;
+                transition: all 0.3s ease-in;
+                height: 40px;
+                width: 40;
+            }
+        }
+        a:is(:hover) {
+            background-color: #08759196;
+            transform: scale(0.8);
+        }
+        a:is(:hover) span {
+            width: 60px;
+        }
+        
+
      }
     }
 }
