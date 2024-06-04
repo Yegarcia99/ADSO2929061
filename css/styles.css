@@ -73,6 +73,7 @@ body{
     color: var(--COLOR-2);
     font-family: var(--font-fm);
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     min-height: 100vh;
     nav {
@@ -184,4 +185,46 @@ body.emmet{
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='30' viewBox='0 0 1000 120'%3E%3Cg fill='none' stroke='%231B5223' stroke-width='10' %3E%3Cpath d='M-500 75c0 0 125-30 250-30S0 75 0 75s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 45c0 0 125-30 250-30S0 45 0 45s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 105c0 0 125-30 250-30S0 105 0 105s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 15c0 0 125-30 250-30S0 15 0 15s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500-15c0 0 125-30 250-30S0-15 0-15s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 135c0 0 125-30 250-30S0 135 0 135s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3C/g%3E%3C/svg%3E");
     background-attachment: fixed;
     background-size: cover;
+    background-position: center;
+    
+    h2 {
+        color: var(--color-1);
+        border-bottom: none;
+        max-width: 80%;
+        text-align: center;
     }
+    menu {
+        a:is(:link, :visited){
+            color: rgb(13, 14, 13);
+            span {
+                background-color: rgb(61, 63, 61);
+            }
+             }
+        }
+    
+    }
+    section {
+        background-color: rgba(36, 32, 32, 0.548);
+        border-radius: 4px;
+        padding: 1rem;
+        width: 440px;
+        h3 {
+            color: #fffc;
+            font-size: 1.4rem;
+            font-weight: 400;
+            border-bottom: 2px dotted#fff6;
+            margin-block: 0.6rem;
+        }
+        p {
+            color: greenyellow;
+            font-size: 1.4rem;
+        }
+        xmp {
+            background-color: #0009;
+            border-radius: 4px;
+            color: #adff2f;
+            font-size: 1rem;
+            padding: 10px 10px 20px 10px;               
+        }
+    }
+
