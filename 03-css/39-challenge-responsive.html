@@ -1,177 +1,203 @@
-<style>
-    * {
-        transition: all 0.2s ease-in;
-    }
+<!DOCTYPE html>
+<html lang="en">
 
-    body {
-        background: url(https://e1.pxfuel.com/desktop-wallpaper/142/1008/desktop-wallpaper-nanatsu-no-taizai-theme-for-windows-10-nanatsu-no-taizai.jpg);
-        font-family: sans-serif;
-    }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>responsive</title>
+    <style>
+        * {
+            transition: all 0.2s ease-in;
+        }
 
-    main {
-        background-color: #ccc;
-        display: flex;
-        gap: 1rem;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        width: 1024px;
-        margin: 2rem auto;
-        padding: 1rem;
-        
-    }
+        body {
+            background: url(https://e1.pxfuel.com/desktop-wallpaper/142/1008/desktop-wallpaper-nanatsu-no-taizai-theme-for-windows-10-nanatsu-no-taizai.jpg) no-repeat center /cover fixed;
+            font-family: sans-serif;
+        }
 
-    main div {
-        background: #0009;
-        height: 200px;
-        width: 200px;
-    }
-
-     div img {
-        object-fit: cover;
-        background-size: contain;
-    }
-
-    article {
-        background-color: #ccc;
-        display: flex;
-        gap: 1rem;
-        justify-content: center;
-        align-items: center;
-        width: 1024px;
-        margin: 2rem auto;
-        padding: 1rem;
-    }
-
-    header {
-        background-color: #fff1;
-        display: flex;
-        gap: 1rem;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        width: 850px;
-        margin: 2rem auto;
-        padding: 1rem;
-    }
-
-    div.logo {
-        position: relative;
-    }
-
-    div.imag {
-        display: flex;
-        width: 800px;
-        gap: 1rem;
-    }
-
-    div.img1 {
-        background: url(images/escannor.jpg) no-repeat center /cover;
-        height: 200px;
-        width: 200px;
-        position: relative;
-
-    }
-
-    div.img2 {
-        background: url(images/merlin.jpg) no-repeat center /cover;
-        height: 200px;
-        width: 200px;
-        position: relative;
-
-    }
-
-    div.img3 {
-        background: url(images/meliodas.jpg) no-repeat center /cover;
-        height: 200px;
-        width: 200px;
-        position: relative;
-
-    }
-
-    div.img4 {
-        background: url(images/ban.jpg) no-repeat center /cover;
-        height: 200px;
-        width: 200px;
-        position: relative;
-
-    }
-
-    h4 {
-        background-color: #0009;
-        color: #fff;
-        font-size: 2rem;
-        padding: 1rem;
-        position: absolute;
-        bottom: 0;
-        margin: 0;
-        width: 168px;
-        transition: all 0.4s ease-in
-    }
-
-
-    @media (max-width: 1024px) {
         main {
-            width: 900px;
+            background-color: #ccc;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            width: 1024px;
+            margin: 2rem auto;
+            padding: 1rem;
+
+        }
+
+        div img {
+           
+            background-size: contain;
         }
 
         article {
-            width: 900px;
+            background-color: #ccc;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            width: 1024px;
+            margin: 2rem auto;
+            padding: 1rem;
         }
-        
 
-    }
+        div.logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
 
-    @media (max-width: 600px) {
-        main {
-            width: 400px;
+        div.imag {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        div.imag div {
+            height: 200px;
+            width: 200px;
+            position: relative;
+        }
+
+        div.imag div h4 {
+            position: absolute;
+            background-color: #0009;
+            color: #fff;
+            text-align: center;
+            font-size: 2rem;
+            padding: 1rem;
+            bottom: 0;
+            margin: 0;
+            width: 168px;
+            transition: all 0.4s ease-in;
+        }
+
+        div.img1 {
+            background: url(images/escannor.jpg) no-repeat center /cover;
+            
+        }
+
+        div.img2 {
+            background: url(images/merlin.jpg) no-repeat center /cover;
+        }
+
+        div.img3 {
+            background: url(images/meliodas.jpg) no-repeat center /cover;
+        }
+
+        div.img4 {
+            background: url(images/ban.jpg) no-repeat center /cover;
+        }
+
+        div.imag div:hover h4 {
+           padding-block: 2rem;
         }
 
         article {
-            flex-direction: column;
-            width: 500px;
+            display: flex;
+            gap: 1rem;
         }
-    }
-</style>
-<header>
-    <div class="logo">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKjBG6QC_dgyxByEk8eud-sMCCzQGKuO-hEOOXlE_G2sLy419yAm6oIV7eBBrCoBiiS_8&usqp=CAU  "
-            alt="">
-    </div>
-</header>
-<main>
 
-    <div class="imag">
-        <div class="img1">
-            <h4>Escanor</h4>
+        article div img {
+            width: 320px;
+        }
+
+        @media (max-width: 1024px) {
+            main {
+                width: 600px;
+            }
+            article {
+                width: 600px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            
+            main {
+                width: 340px;
+            }
+
+            article {
+                flex-direction: column;
+                width: 340px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKjBG6QC_dgyxByEk8eud-sMCCzQGKuO-hEOOXlE_G2sLy419yAm6oIV7eBBrCoBiiS_8&usqp=CAU"
+                alt="">
         </div>
+    </header>
+    <main>
 
-        <div class="img2">
-            <h4>Merlín</h4>
+        <div class="imag">
+            <div class="img1">
+                <h4>Escanor</h4>
+            </div>
+
+            <div class="img2">
+                <h4>Merlín</h4>
+            </div>
+
+            <div class="img3">
+                <h4>Meliodas</h4>
+            </div>
+
+            <div class="img4">
+                <h4>Ban</h4>
+            </div>
+
         </div>
-
-        <div class="img3">
-            <h4>Meliodas</h4>
+    </main>
+    <article>
+        <div class="img">
+            <img src="images/7pecados1.jpg" alt="">
         </div>
-
-        <div class="img4">
-            <h4>Ban</h4>
+        <div class="txt">
+            <h2>Nanatsu no Taizai</h2>
+            <p>Los Siete Pecados Capitales sirvieron a Britannia durante seis años, ganándose una gran reputación
+                durante
+                este tiempo como los caballeros mas fuertes de Liones. Sin embargo, debido a que fueron inculpados por
+                asesinar a Zaratras, el Gran Caballero Sagrado, se los tachó de bandidos y traidores.</p>
+            <p>Meliodas ordenó al grupo a dispersarse para evitar ser capturados, y todo el mundo fue capaz de escapar
+                por
+                separado. Se sospecha que uno de los miembros podría ser un traidor que ayudó a trazar las artimañas y
+                que
+                dejo inconsciente a Meliodas poco después de dar la orden de escapar. Mas tarde se reveló ser Merlin,
+                aunque
+                al parecer esta tenia un motivo para hacerlo que aun no se ha revelado</p>
         </div>
+    </article>
+    <article>
+        <div class="img">
+            <img src="images/escanor1.jpg" alt="">
+        </div>
+        <div class="txt">
+            <h2>Nanatsu no Taizai</h2>
+            <p>Los Siete Pecados Capitales sirvieron a Britannia durante seis años, ganándose una gran reputación
+                durante
+                este tiempo como los caballeros mas fuertes de Liones. Sin embargo, debido a que fueron inculpados por
+                asesinar a Zaratras, el Gran Caballero Sagrado, se los tachó de bandidos y traidores.</p>
+            <p>Meliodas ordenó al grupo a dispersarse para evitar ser capturados, y todo el mundo fue capaz de escapar
+                por
+                separado. Se sospecha que uno de los miembros podría ser un traidor que ayudó a trazar las artimañas y
+                que
+                dejo inconsciente a Meliodas poco después de dar la orden de escapar. Mas tarde se reveló ser Merlin,
+                aunque
+                al parecer esta tenia un motivo para hacerlo que aun no se ha revelado</p>
+        </div>
+    </article>
+</body>
 
-    </div>
-</main>
-<article>
-    <div class="img">
-        <img src="https://i.ytimg.com/vi/VUsfPWcHZhc/sddefault.jpg" alt="">
-    </div>
-    <div class="txt">
-        <h2>Nanatsu no Taizai</h2>
-        <p>Los Siete Pecados Capitales sirvieron a Britannia durante seis años, ganándose una gran reputación durante
-            este tiempo como los caballeros mas fuertes de Liones. Sin embargo, debido a que fueron inculpados por
-            asesinar a Zaratras, el Gran Caballero Sagrado, se los tachó de bandidos y traidores.</p>
-        <p>Meliodas ordenó al grupo a dispersarse para evitar ser capturados, y todo el mundo fue capaz de escapar por
-            separado. Se sospecha que uno de los miembros podría ser un traidor que ayudó a trazar las artimañas y que
-            dejo inconsciente a Meliodas poco después de dar la orden de escapar. Mas tarde se reveló ser Merlin, aunque
-            al parecer esta tenia un motivo para hacerlo que aun no se ha revelado</p>
-    </div>
-</article>
+</html>
