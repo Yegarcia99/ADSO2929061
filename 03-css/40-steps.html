@@ -33,19 +33,19 @@
         }
 
         section div.bg div.steps.front {
-            background-position-y: calc(1024px/4)*0;
+            background-position-y: calc(1024px/4*0);
         }
 
         section div.bg div.steps.left {
-            background-position-y: calc(1024px/4)*-1;
+            background-position-y: calc(1024px/4*-1);
         }
 
         section div.bg div.steps.right {
-            background-position-y: calc(1024px/4)*-2;
+            background-position-y: calc(1024px/4*-2);
         }
 
         section div.bg div.steps.back {
-            background-position-y: calc(1024px/4)*-3;
+            background-position-y: calc(1024px/4*-3);
         }
 
         section div.bg div.controls {
@@ -113,6 +113,57 @@
 
         </section>
     </main>
+    <script>
+        let btnFront = document.querySelector('.btnFront')
+        let btnBack  = document.querySelector('.btnBack')
+        let btnLeft  = document.querySelector('.btnLeft')
+        let btnRight = document.querySelector('.btnRight')
+
+        let steps    = document.querySelector('.steps')
+
+        btnFront.addEventListener('click', () => {
+            removeAllClasses()
+            steps.classList.add('front')
+        })
+
+        btnBack.addEventListener('click', () => {
+            removeAllClasses()
+            steps.classList.add('back')
+        })
+
+        btnLeft.addEventListener('click', () => {
+            removeAllClasses()
+            steps.classList.add('left')
+        })
+
+        btnRight.addEventListener('click', () => {
+            removeAllClasses()
+            steps.classList.add('right')
+        })
+
+        function removeAllClasses() {
+            steps.classList.remove('front', 'back', 'left', 'right')
+        }
+
+        document.addEventListener('keyup', function(e) {
+            if(e.keyCode == 37) {
+                removeAllClasses()
+                steps.classList.add('left')
+            }
+            if(e.keyCode == 38) {
+                removeAllClasses()
+                steps.classList.add('back')
+            }
+            if(e.keyCode == 39) {
+                removeAllClasses()
+                steps.classList.add('right')
+            }
+            if(e.keyCode == 40) {
+                removeAllClasses()
+                steps.classList.add('front')
+            }
+        })
+    </script>
 </body>
 
 </html>
