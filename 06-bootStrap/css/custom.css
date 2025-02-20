@@ -1,0 +1,35 @@
+nav.navbar.bg-custom{
+    background-color: #1D4D19;
+
+    a.nav-link {
+        color: #fff;
+    }
+
+    @font-face {
+        font-family: 'Poppins-400';
+        src: url();
+    }
+}
+
+div.row.hero {
+    margin-top: 102px;
+    div.col:nth-child(1) {
+        background-color: #97BFA9;
+        height: 680px;
+        h2{
+            color: #fff;
+        }
+        p{
+            text-align: justify;
+        }
+    }
+
+    div.col:nth-child(2) {
+        background: #97DFC8 url(../06-challenge/images/WhatsApp_Image_2025-02-18_at_9.08.33_PM-removebg-preview.png) no-repeat center bottom;
+        height: 680px;
+        background-size: 480px;
+    }
+
+    
+    
+}
