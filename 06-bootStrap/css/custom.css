@@ -33,3 +33,162 @@ div.row.hero {
     
     
 }
+div.row.about {
+    margin-top: 102px;
+    div.col1:nth-child(1) {
+        background: #fff url(../06-challenge/images/WhatsApp_Image_2025-02-18_at_9.14.19_PM-removebg-preview.png) no-repeat center bottom;
+        height: 800px;
+        background-size: 480px;
+    }
+    div.col1:nth-child(2) {
+        background-color: #fff;
+        height: 680px;
+        h2{
+            color: #000000;
+        }
+        p{
+            text-align: justify;
+        }
+    }
+
+
+    
+    
+}
+
+
+div.row.services {
+    background: #97CCB7;
+    padding: 30px;
+
+    div.row.tittle {
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+
+        h1 {
+            text-align: center;
+
+        }
+
+        h2 {
+            text-align: center;
+
+        }
+    }
+
+    div.col {
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+        
+        
+        div.card {
+            img {
+                background-color: rgb(176, 168, 168);
+                margin-top: 25px;
+                width: 30px;
+                height: 30px;
+
+            }
+
+         p.card-text{
+            font-size: small;
+         }
+        }
+
+        div.card {
+            
+            color: rgb(0, 0, 0);
+        }
+    }
+}
+
+div.row.portfolio {
+    background-color: #fff;
+    
+
+    div.tittle.row {
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        
+
+        h1 {
+            text-align: center;
+        }
+
+        h2 {
+            text-align: center;
+        }
+    }
+
+    div.card {
+        width: 300px;
+        margin-left: 30px;
+        img {
+            border: solid 10px #97CCB7;
+            width: 300px;
+            height: 250px;
+            
+        }
+    }
+}
+
+div.row.footer {
+    background-color: #013E11;
+
+    div.nombre {
+        margin-top: 50px;
+        width: 100%;
+        justify-content: center;
+        color: #ffffff;
+
+        h2 {
+            margin-top: 20px;
+            margin-left: 20px;
+            color: white;
+        }
+    }
+
+    div.redes {
+        margin-top: 50px;
+        width: 100%;
+        justify-content: center;
+        color: #ffffff;
+
+        div.img {
+
+            background-color: #ffffff;
+            margin-left: 25px;
+            border-radius: 50%;
+            width: 70Px;
+            height: 70px;
+            justify-content: center;
+            align-items: center;
+
+            img {
+                width: 50px;
+                height: 50px;
+            }
+        }
+    }
+
+    div.correo {
+        margin-top: 50px;
+        width: 100%;
+        justify-content: center;
+        color: #fafafa;
+        a{
+            color: #fafafa;
+        }
+    }
+    div.fin {
+        justify-content: center;
+        width: 100%;
+        p{
+            color: #ffffff;
+            
+        }
+    }
+}
