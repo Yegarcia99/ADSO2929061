@@ -14,15 +14,18 @@
                 flex
                 justify-center
                 items-center
-                my-10">
+                my-10
+                gap-10">
 
-        <section class="Group1
+        <section id="Group1" class="Group1
                w-[386px]
                h-[800px]
                bg-[#758755]
                bg-[url(images/image1.png)]
                bg-no-repeat
-               bg-top">
+               bg-top
+               translate-x-[-300%]
+               target:translate-x-[0px]">
 
             <div class="text 
                     text-[40px]
@@ -30,12 +33,12 @@
                     mt-[29rem]
                     mx-10">
 
-                    <h1 class="LA">
-                        LA
-                    </h1>
-                    <h1 class="Granja">
-                        GRANJA
-                    </h1>
+                <h1 class="LA">
+                    LA
+                </h1>
+                <h1 class="Granja">
+                    GRANJA
+                </h1>
             </div>
 
             <div class="Parrafo
@@ -76,6 +79,97 @@
                                  ">Sign Up</a>
             </div>
 
+        </section>
+
+        <section id="" class="Group2
+                        w-[386px]
+                        h-[800px]
+                        bg-[#758755]
+                        bg-[url(images/image.png)]
+                        bg-no-repeat
+                        bg-top
+                        rounded-t-[20px]
+                        
+                        target:translate-x-[0px]">
+
+            <div class="my-[250px]
+                         ">
+                <h1 class="text-5xl
+                           justify-center
+                           items-center
+                           text-center
+                           font-extrabold
+                        ">
+                    Sign in
+                </h1>
+
+                <h4 class="text-sm
+                           justify-center
+                           items-center
+                           text-center
+                           
+                           ">
+
+                    Ingrese a su cuenta</h4>
+            </div>
+
+            <form action="Group1" class="
+                                    mt-[-150px]
+                                    flex
+                                    flex-col
+                                    items-center
+                                    justify-center">
+
+                <label class="flex
+                              w-55
+                              gap-1
+                              items-center
+                              font-[500px]
+                              text-[20px]
+                              my-3">
+
+                    <img src="images/Group 4.png" alt="Email">
+                    Email:
+                </label>
+
+                <input placeholder="Usuario-Email" class="rounded-full
+                                                    indent-2
+                                                    w-56
+                                                    h-10
+                                                  bg-white">
+
+
+                <label class="flex
+                                                  w-55
+                                                  gap-1
+                                                  items-center
+                                                  font-[500px]
+                                                  text-[20px]
+                                                  my-3">
+
+                    <img src="images/Group 5.png" alt="">
+                    Password:
+                </label>
+
+                <input placeholder="Password:" class="rounded-full
+                                                      indent-2
+                                                      w-56
+                                                      h-10
+                                                      bg-white">
+
+            </form>
+
+            <button class="rounded-full
+                           indent-2
+                           my-15
+                           text-center
+                           items-center
+                           justify-center
+                           w-56
+                           h-10
+                           mx-20
+                           bg-[#66AD7E]">
+                Sign in </button>
         </section>
     </main>
     <script src="js/tailwind.js"></script>
