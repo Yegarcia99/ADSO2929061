@@ -14,7 +14,7 @@
                 flex
                 justify-center
                 items-center
-                my-10
+                my-[500px]
                 gap-10">
 
         <section id="Group1" class="Group1
@@ -25,7 +25,8 @@
                bg-no-repeat
                bg-top
                translate-x-[-300%]
-               target:translate-x-[0px]">
+               target:translate-x-[0px]
+               absolute">
 
             <div class="text 
                     text-[40px]
@@ -61,7 +62,7 @@
                         ">
 
 
-                <a href="" class="w-[150px]
+                <a href="#Group2" class="w-[150px]
                                  bg-[#DCEDA5]
                                  h-[40px]
                                  rounded-s-[20px]
@@ -69,7 +70,7 @@
                                  items-center
                                  flex
                                  ">Sign In</a>
-                <a href="" class="w-[150px]
+                <a href="#Group3" class="w-[150px]
                                  bg-white
                                  h-[40px]
                                  rounded-e-[20px]
@@ -81,7 +82,7 @@
 
         </section>
 
-        <section id="" class="Group2
+        <section id="Group2" class="Group2
                         w-[386px]
                         h-[800px]
                         bg-[#758755]
@@ -89,8 +90,17 @@
                         bg-no-repeat
                         bg-top
                         rounded-t-[20px]
-                        
-                        target:translate-x-[0px]">
+                        translate-x-[-500%]
+                        target:translate-x-[0px]
+                        absolute">
+
+            <a href="#Group1" class="absolute 
+                        left-[20px]
+                        hover:translate-x-[-6px]
+                        transition-all
+                        top-[20px]">
+                <img class="w-10" src="images/ico-back.svg" alt="Back Welcome">
+            </a>
 
             <div class="my-[250px]
                          ">
@@ -107,13 +117,15 @@
                            justify-center
                            items-center
                            text-center
+                           text-[20px]
+                           font-bold
                            
                            ">
 
                     Ingrese a su cuenta</h4>
             </div>
 
-            <form action="Group1" class="
+            <form action="" class="
                                     mt-[-150px]
                                     flex
                                     flex-col
@@ -133,6 +145,128 @@
                 </label>
 
                 <input placeholder="Usuario-Email" class="rounded-full
+                                                    indent-2
+                                                    w-56
+                                                    h-10
+                                                  bg-white">
+
+
+                <label class="flex
+                                                  w-55
+                                                  gap-1
+                                                  items-center
+                                                  font-[500px]
+                                                  text-[20px]
+                                                  my-3">
+
+                    <img src="images/Group 5.png" alt="">
+                    Password:
+                </label>
+
+                <input placeholder="Password:" class="rounded-full
+                                                      indent-2
+                                                      w-56
+                                                      h-10
+                                                      bg-white">
+
+            </form>
+
+            <button class="rounded-full
+                           indent-2
+                           my-15
+                           text-center
+                           items-center
+                           justify-center
+                           w-56
+                           h-10
+                           mx-20
+                           bg-[#66AD7E]">
+                Sign in </button>
+        </section>
+
+        <section id="Group3" class="Group3
+                        w-[386px]
+                        h-[800px]
+                        bg-[#758755]
+                        bg-[url(images/image.png)]
+                        bg-no-repeat
+                        bg-top
+                        rounded-t-[20px]
+                        translate-x-[-600%]
+                        target:translate-x-[0px]
+                        absolute">
+
+            <a href="#Group1" class="absolute 
+                        left-[20px]
+                        hover:translate-x-[-6px]
+                        transition-all
+                        top-[20px]">
+                <img class="w-10" src="images/ico-back.svg" alt="Back Welcome">
+            </a>
+
+            <div class="my-[200px]
+                         ">
+                <h1 class="text-5xl
+                           justify-center
+                           items-center
+                           text-center
+                           font-extrabold
+                        ">
+                    Sign Up
+                </h1>
+
+                <h4 class="text-sm
+                           justify-center
+                           items-center
+                           text-center
+                           text-[20px]
+                           font-bold
+                           my-2
+                           
+                           ">
+
+                    Cree su cuenta</h4>
+            </div>
+
+            <form action="" class="
+                                    mt-[-150px]
+                                    flex
+                                    flex-col
+                                    items-center
+                                    justify-center">
+
+
+                <label class="flex
+                                    w-55
+                                    gap-1
+                                    items-center
+                                    font-[500px]
+                                    text-[20px]
+                                    my-3">
+
+                    <img src="images/Group 4.png" alt="Email">
+                    Email:
+                </label>
+
+                <input placeholder="Usuario-Email" class="rounded-full
+                                                          indent-2
+                                                          w-56
+                                                          h-10
+                                                        bg-white">
+
+                <label class="flex
+                              w-55
+                              gap-1
+                              items-center
+                              font-[500px]
+                              text-[20px]
+                              my-3">
+
+                    <img src="images/Group 4.png" alt="Email">
+                    Mobile Number:
+                </label>
+
+                <input placeholder="Number" class="rounded-full
                                                     indent-2
                                                     w-56
                                                     h-10
