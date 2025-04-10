@@ -93,67 +93,79 @@
     </main>
 
     <script>
-        //elements
-        const pkName = document.querySelector('.pk-name')
-        const pkHp = document.querySelector('.pk-hp')
+        // Elements
+        const pkName  = document.querySelector('.pk-name')
+        const pkHp    = document.querySelector('.pk-hp')
         const pkImage = document.querySelector('.pk-image')
 
-        //buttons
+        // Buttons
         const btnAttack = document.querySelector('.btn-attack')
-        const btnFeed = document.querySelector('.btn-feed')
+        const btnFeed   = document.querySelector('.btn-feed')
 
-        //object
-        const pokemon ={
-
-            //Attributes
+        // Object
+        const pokemon = {
+            // Attributes
             name: 'Snorlax',
             type: 'Normal',
             hp: 100,
             image: 'images/snorlax-sprite.png',
             status: 'alive',
-
-            //Methods
-
-            render: function(fx){
+            // Methods
+            render: function() {
                 pkName.innerHTML = `${this.name} <small>[${this.type}]</small>`
                 pkImage.style.backgroundImage = `url(${this.image})`
-                this.updateHp()
+                this.updateHp('animate__rubberBand')
+                this.updateStatus()
             },
-
-            updateHp: function(){
-                pkHp.textContent=`HP: ${this.hp}`
-                //animate__tada : attack
-                //animate__rubberBand : feed
-                pkImage.classList.add(`${this.status}` , 'animate__rubberBand')
+            updateHp: function(fx) {
+                pkHp.textContent = `HP: ${this.hp}`
+                pkImage.classList.add(`${this.status}`, fx)
             },
-
             feed: function() {
-                if(this.hp < 200) {
+                if (this.hp < 200) {
                     this.hp += 25
                     this.status = 'feed'
-                    pkImage.classList.remove('alive' , 'attack' , 'dead')
+                    pkImage.classList.remove('alive', 'attack', 'dead')
                     this.updateHp('animate__rubberBand')
                     this.updateStatus()
                 }
-            },
-
+            }, 
             attack: function() {
-                alert('attack')
+                if (this.hp <= 25) {
+                    this.status = 'dead'
+                    this.hp = 0
+                    pkImage.classList.remove('feed', 'alive', 'attack')
+                    this.updateHp('animate__swing')
+                    this.updateStatus()
+                } else {
+                    this.hp -= 25
+                    this.status = 'attack'
+                    pkImage.classList.remove('feed', 'alive', 'dead')
+                    this.updateHp('animate__tada')
+                    this.updateStatus()
+                }
             },
-
             updateStatus: function() {
-                kImage.classList.remove('alive' , 'attack' , 'dead')
+                setTimeout(() => {
+                    if (this.status != 'dead') {
+                        this.status = 'alive'
+                        pkImage.classList.remove('animate_rubberBand', 'animatetada', 'animate_swing', 'feed', 'attack', 'dead')
+                    } else {
+                        pkImage.classList.remove('animate__swing')
+                    }
+                }, 1200)
             }
-
-            
         }
-
         pokemon.render()
 
-        //evenst
-    btnFeed.addEventListener('click' , () => {
-        pokemon.attack()
-    })
+        // Events
+        btnFeed.addEventListener('click', () => {
+            pokemon.feed()
+        })
+        btnAttack.addEventListener('click', () => {
+            pokemon.attack()
+        })
+
     </script>
 </body>
 </html>
