@@ -8,20 +8,22 @@
     <link rel="stylesheet" href="../css/Styles.css">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <style>
-        div.calculator{
+        div.calculator {
             background-color: #ffffff;
             border-radius: 15px;
             height: 640px;
             margin: 0 auto;
             width: 380px;
             transition: all 0.5s ease-in;
-            header{
+
+            header {
                 position: relative;
                 border: none;
                 margin: 0 auto;
                 width: 360px;
                 height: 160px;
-                button.btn-mode{
+
+                button.btn-mode {
                     background: url(images/calc/btn-mode.svg) no-repeat center;
                     cursor: pointer;
                     position: absolute;
@@ -31,13 +33,15 @@
                     width: 120px;
                     height: 30px;
                     transition: transform 0.2s ease-in;
-                    &:hover{
+
+                    &:hover {
                         transform: scale(1.1);
                     }
 
                 }
-                input.operation{
-                    color: #000000;
+
+                input.operation {
+                    color: #724c4c;
                     background: transparent;
                     font-size: 16px;
                     outline: none;
@@ -48,9 +52,10 @@
                     font-weight: 500;
                     border: 0px;
                 }
-                h4.result{
+
+                h4.result {
                     position: absolute;
-                    color: #000000;
+                    color: #925b5b;
                     font-weight: 600px;
                     font-size: 40px;
                     top: 100px;
@@ -58,90 +63,121 @@
 
                 }
             }
-            footer{
+
+            footer {
                 display: grid;
                 grid-template-columns: repeat(4, 80px);
                 gap: 5px;
                 width: 336px;
                 margin: 0 auto;
+
                 button {
                     height: 80px;
                     cursor: pointer;
                     border: none;
                     transition: all 0.2s ease-in;
                     opacity: 0.8;
+
                     &:hover {
                         opacity: 1;
                         transform: scale(1.1);
                     }
-                    
+
                     &.btn-clear {
-                    background: transparent url(images/calc/btn-clear.svg) no-repeat center;
-                }
-                &.btn-del {
-                    background: transparent url(images/calc/btn-del.svg) no-repeat center;
-                }
-                &.btn-pow {
-                    background: transparent url(images/calc/btn-pow.svg) no-repeat center;
-                }
-                &.btn-mod {
-                    background: transparent url(images/calc/btn-mod.svg) no-repeat center;
-                }
-                &.btn-1 {
-                    background: transparent url(images/calc/btn-1.svg) no-repeat center;
-                }
-                &.btn-2 {
-                    background: transparent url(images/calc/btn-2.svg) no-repeat center;
-                }
-                &.btn-3 {
-                    background: transparent url(images/calc/btn-3.svg) no-repeat center;
-                }
-                &.btn-4 {
-                    background: transparent url(images/calc/btn-4.svg) no-repeat center;
-                }
-                &.btn-5 {
-                    background: transparent url(images/calc/btn-5.svg) no-repeat center;
-                }
-                &.btn-6 {
-                    background: transparent url(images/calc/btn-6.svg) no-repeat center;
-                }
-                &.btn-7 {
-                    background: transparent url(images/calc/btn-7.svg) no-repeat center;
-                }
-                &.btn-8 {
-                    background: transparent url(images/calc/btn-8.svg) no-repeat center;
-                }
-                &.btn-9 {
-                    background: transparent url(images/calc/btn-9.svg) no-repeat center;
-                }
-                &.btn-mult {
-                    background: transparent url(images/calc/btn-mult.svg) no-repeat center;
-                }
-                &.btn-subs {
-                    background: transparent url(images/calc/btn-subs.svg) no-repeat center;
-                }
-                &.btn-plus {
-                    background: transparent url(images/calc/btn-plus.svg) no-repeat center;
-                }
-                &.btn-div {
-                    background: transparent url(images/calc/btn-div.svg) no-repeat center;
-                }
-                &.btn-0 {
-                    background: transparent url(images/calc/btn-0.svg) no-repeat center;
-                }
-                &.btn-dot {
-                    background: transparent url(images/calc/btn.dot.svg) no-repeat center;
-                }
-                &.btn-equal {
-                    background: transparent url(images/calc/btn-equal.svg) no-repeat center;
-                }
+                        background: transparent url(images/calc/btn-clear.svg) no-repeat center;
+                    }
+
+                    &.btn-del {
+                        background: transparent url(images/calc/btn-del.svg) no-repeat center;
+                    }
+
+                    &.btn-pow {
+                        background: transparent url(images/calc/btn-pow.svg) no-repeat center;
+                    }
+
+                    &.btn-mod {
+                        background: transparent url(images/calc/btn-mod.svg) no-repeat center;
+                    }
+
+                    &.btn-1 {
+                        background: transparent url(images/calc/btn-1.svg) no-repeat center;
+                    }
+
+                    &.btn-2 {
+                        background: transparent url(images/calc/btn-2.svg) no-repeat center;
+                    }
+
+                    &.btn-3 {
+                        background: transparent url(images/calc/btn-3.svg) no-repeat center;
+                    }
+
+                    &.btn-4 {
+                        background: transparent url(images/calc/btn-4.svg) no-repeat center;
+                    }
+
+                    &.btn-5 {
+                        background: transparent url(images/calc/btn-5.svg) no-repeat center;
+                    }
+
+                    &.btn-6 {
+                        background: transparent url(images/calc/btn-6.svg) no-repeat center;
+                    }
+
+                    &.btn-7 {
+                        background: transparent url(images/calc/btn-7.svg) no-repeat center;
+                    }
+
+                    &.btn-8 {
+                        background: transparent url(images/calc/btn-8.svg) no-repeat center;
+                    }
+
+                    &.btn-9 {
+                        background: transparent url(images/calc/btn-9.svg) no-repeat center;
+                    }
+
+                    &.btn-mult {
+                        background: transparent url(images/calc/btn-mult.svg) no-repeat center;
+                    }
+
+                    &.btn-subs {
+                        background: transparent url(images/calc/btn-subs.svg) no-repeat center;
+                    }
+
+                    &.btn-plus {
+                        background: transparent url(images/calc/btn-plus.svg) no-repeat center;
+                    }
+
+                    &.btn-div {
+                        background: transparent url(images/calc/btn-div.svg) no-repeat center;
+                    }
+
+                    &.btn-0 {
+                        background: transparent url(images/calc/btn-0.svg) no-repeat center;
+                    }
+
+                    &.btn-dot {
+                        background: transparent url(images/calc/btn.dot.svg) no-repeat center;
+                    }
+
+                    &.btn-equal {
+                        background: transparent url(images/calc/btn-equal.svg) no-repeat center;
+                    }
 
                 }
-                
+
             }
+
             /* Dark Mode */
             &.dark {
                 background-color: #000000;
+                header{
+                    input{
+                        color: #ffffff;
+                    }
+                    h4{
+                        color: #ffffff;
+                    }
+                }
             }
         }
     </style>
@@ -168,7 +204,7 @@
                 <header>
                     <button class="btn-mode"></button>
                     <input type="text" class="operation" ">
-                    <h4 class="result"></h4>
+                    <h4 class=" result"></h4>
                 </header>
                 <footer>
                     <button class="btn-clear"></button>
@@ -205,7 +241,7 @@
         const btnClear = document.querySelector('.btn-clear')
         const btnDel = document.querySelector('.btn-del')
         const btnEqual = document.querySelector('.btn-equal')
-        const btnMode = document.querySelector ('.btn-mode')
+        const btnMode = document.querySelector('.btn-mode')
         //elements
 
         btnMode.addEventListener('click', (e) => {
@@ -213,18 +249,18 @@
         })
 
         btnClear.addEventListener('click', (e) => {
-                result.textContent = ''
-                operation.value = ''
-            })
-           
+            result.textContent = ''
+            operation.value = ''
+        })
+
         btnDel.addEventListener('click', (e) => {
             operation.value = operation.value.slice(0, -1)
-        })   
-        
-        btnEqual.addEventListener('click', (e) => {
-            result. textContent = `=${eval(operation.value)}`
         })
-       
+
+        btnEqual.addEventListener('click', (e) => {
+            result.textContent = `=${eval(operation.value)}`
+        })
+
 
         btnNumbers.forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -237,6 +273,20 @@
                 operation.value += btn.dataset.opr
             })
         })
+        //Dark Mode
+        const darkMode = window.matchMedia('(prefers-color-scheme: dark)')
+        darkMode.addListener(darkModeChange)
+
+        function darkModeChange(dm) {
+            if (dm.matches) {
+                calculator.classList.add('dark')
+            } else {
+                calculator.classList.remove('dark')
+            }
+        }
+        darkModeChange(darkMode)
+
     </script>
 </body>
+
 </html>
