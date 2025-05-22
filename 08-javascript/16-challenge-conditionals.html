@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../css/styles.css">
     <style>
         div.weather {
-             
+
             div.search {
                 display: flex;
                 justify-content: center;
@@ -38,21 +38,24 @@
                 }
             }
         }
-        
-        .widget{
+
+        .widget {
             position: relative;
             background: url(images/sol.png) no-repeat center;
             width: 400px;
             height: 400px;
-            &.dark{
-                 background: url(images/noche.png) no-repeat center;
-                 h4 {
+
+            &.dark {
+                background: url(images/noche.png) no-repeat center;
+
+                h4 {
                     color: #fff;
-                 }
+                }
             }
-          
+
         }
-          h4.country{
+
+        h4.country {
             position: absolute;
             background-color: transparent;
             color: black;
@@ -61,10 +64,10 @@
             top: 20px;
             font-weight: 100;
             font-size: 20px;
-            
+
         }
 
-        h4.name{
+        h4.name {
             position: absolute;
             color: black;
             left: 50%;
@@ -72,9 +75,64 @@
             top: 50px;
             font-size: 40px;
         }
-        
-             
 
+        h4.datetime {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 95px;
+            font-weight: 100;
+            color: black;
+
+        }
+
+        h4.tempc {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            color: black;
+            font-size: 70px;
+            bottom: 85px;
+        }
+
+        .humani {
+            display: flex;
+            position: absolute;
+            left: 10%;
+            bottom: 20px;
+            color: black;
+            display: flex;
+            font-size: 15px;
+            font-weight: 100;
+        }
+
+        .clo {
+            display: flex;
+            position: absolute;
+            right: 10%;
+            bottom: 20px;
+            color: black;
+            display: flex;
+            font-size: 15px;
+            font-weight: 100;
+        }
+
+        .conditex {
+            display: flex;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 60px;
+            color: black;
+        }
+        img.conditionIcon{
+             position: absolute;
+             left: 50%;
+            transform: translateX(-50%);
+            top: 130px;
+            width: 140px;
+            height: 140px;
+        }
     </style>
 </head>
 
@@ -112,18 +170,32 @@
                     </button>
                 </div>
 
-                 <div class="widget">
+                <div class="widget">
                     <H4 class="country"></H4>
                     <h4 class="name"></h4>
                     <h4 class="datetime"></h4>
-                    <h4 class="tempc"></h4>
+                    <h4 class="tempc"> </h4>
                     <h4 class="isDay"></h4>
-                    <h4 class="conditionText"></h4>
-                    <h4 class="conditionIcon"></h4>
-                    <h4 class="humidity"></h4>
-                    <h4 class="cloud"></h4>
+
+                    <div class="conditex">
+                        <h4 class="text">Condition:</h4>
+                        <h4 class="conditionText"></h4>
+                    </div>
+
+                    <img class="conditionIcon">
+
+                    <div class="humani">
+                        <h4 class="text">Humidity: </h4>
+                        <h4 class="humidity"></h4>
+                    </div>
+
+                    <div class="clo">
+                        <h4 class="text">Cloud: </h4>
+                        <h4 class="cloud"></h4>
+                    </div>
+
                 </div>
-                
+
             </div>
 
         </section>
@@ -178,9 +250,10 @@
                 "cloud": data.current.cloud
 
 
+
             }
 
-           
+
             //console.table(info)
             //infoList.textContent= JSON.stringify(info)
             /*infoList.innerHTML = ''
@@ -192,13 +265,19 @@
                 }
             }*/
 
-            if (info.isDay==0) {
+            if (info.isDay == 0) {
                 widget.classList.add('dark')
             } else {
                 widget.classList.remove('dark')
             }
-           country.textContent=info.country
-           name.textContent=info.name
+            country.textContent = info.country
+            name.textContent = info.name
+            datetime.textContent = info.datetime
+            tempc.textContent = info.tempc
+            humidity.textContent = info.humidity
+            cloud.textContent = info.cloud
+            condition_Text.textContent = info.conditionText
+            condition_Icon.src = info.conditionIcon
         }
 
         showWeather('Manizales')
