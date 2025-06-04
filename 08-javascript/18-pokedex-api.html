@@ -7,21 +7,46 @@
     <title>18-pokedex-api</title>
     <link rel="stylesheet" href="../css/styles.css">
     <style>
-        ul.pokemons{
+        main section {
+            *background-color: rgb(255, 255, 255) !important;
+        }
+
+        select.pk-generation {
+            appearance: none;
+            padding: 0.4rem 0.8rem;
+            display: flex;
+            margin: 2rem auto;
+        }
+
+        ul.pokemons {
             list-style: none;
             margin: 0;
             padding: 0;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 0.4rem;
-            li{
-                border: 2px solid #fff9;
+
+            li {
+                border: 2px solid rgba(255, 255, 255, 0.6);
                 border-radius: 0.4rem;
-                h4, h5 {
+
+                h4,
+                h5 {
                     margin: 0;
                     text-align: center;
                 }
-            }            
+            }
+            &.hide{
+                display: none;
+            }
+        }
+        img.loader{
+            display: flex;
+            margin: 8rem auto;
+            width: 200px;
+            &.hide{
+                display: none;
+            }
         }
     </style>
 </head>
@@ -46,32 +71,97 @@
 
         </header>
         <section>
-
+            <select class="pk-generation">
+            </select>
+            <img class="loader" src="images/loader.gif" alt="">
             <ul class="pokemons"></ul>
 
         </section>
     </main>
     <script>
+        // objects
+
+        const generations = {
+            range: [
+                { from: 1, to: 151 },
+                { from: 152, to: 251 },
+                { from: 252, to: 386 },
+                { from: 387, to: 493 },
+                { from: 494, to: 649 },
+                { from: 650, to: 721 },
+                { from: 722, to: 809 },
+                { from: 810, to: 890 },
+                { from: 891, to: 1025 }
+            ]
+        }
+
+        const types = {
+            normal: "#a8a77a",
+            fire: "#ee8130",
+            water: "#6390f0",
+            electric: "#f7d02c",
+            grass: "#7ac74c",
+            ice: "#96d9d6",
+            fighting: "#c22e28",
+            poison: "#a33ea1",
+            ground: "#e2bf65",
+            flying: "#a98ff3",
+            psychic: "#f95587",
+            bug: "#a6b91a",
+            rock: "#b6a136",
+            dragon: "#6f35fc",
+            dark: "#705746",
+            steel: "#b7b7ce",
+            fairy: "#d685ad",
+            shadow: "#5a5a5a",
+            unknown: "#68a090"
+
+        }
+
+        // select
+        const pkGeneration = document.querySelector('.pk-generation')
+        pkGeneration.innerHTML = `<option value="">Select a Gerenation...</option>`
+        generations['range'].forEach((element, index) => {
+            pkGeneration.innerHTML += `<option value= "${index}">Select a Generation ${++index}</option>`
+        });
+
+        //Events
+        pkGeneration.addEventListener('change', function (e) {
+            if (this.value != '')
+                loadPokemons(generations.range[this.value].from,
+                    generations.range[this.value].to)
+        })
+
         //Elements
 
         const pokemons = document.querySelector('.pokemons')
-        const loadPokemons = async (start, end) => {
+        const loader = document.querySelector('.loader')
+        const loadPokemons = async (from, to) => {
+            loader.classList.remove('hide')
+            pokemons.classList.add('hide')
+            pokemons.innerHTML = ''
+            setTimeout(() => {
+                loader.classList.add('hide')
+                pokemons.classList.remove('hide')
+            }, 4200)
 
-            for (let pk =start; pk <=end; pk++) {
+            for (let pk = from; pk <= to; pk++) {
 
                 const url = `https://pokeapi.co/api/v2/pokemon/${pk}`
                 const response = await fetch(url)
                 const data = await response.json()
 
                 //console.log(data)
-                pokemons.innerHTML += `<li> 
+                const typeColor = data.types[0].type.name
+                pokemons.innerHTML += `<li style="border-color: ${types[typeColor]};
+                                            background: linear-gradient(black, ${types[typeColor]})">
                                             ${data.id}  
                                             ${data.name}
                                             <img src="${data.sprites.front_default}">
                                             </li>`
             }
         }
-        loadPokemons(1, 1025)
+        loadPokemons(1, 151)
 
     </script>
 </body>
