@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="../css/styles.css">
     <style>
         main section {
-            *background-color: rgb(255, 255, 255) !important;
+            background-color: rgb(0, 0, 0) !important;
+            width: 380px;
+            height: 700px;
         }
 
         select.pk-generation {
@@ -16,6 +18,8 @@
             padding: 0.4rem 0.8rem;
             display: flex;
             margin: 2rem auto;
+
+
         }
 
         ul.pokemons {
@@ -23,30 +27,161 @@
             margin: 0;
             padding: 0;
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 0.4rem;
+            height: 600px;
+            overflow-y: auto;
+            font-size: 20px;
+            color: rgb(255, 255, 255);
+
 
             li {
                 border: 2px solid rgba(255, 255, 255, 0.6);
                 border-radius: 0.4rem;
 
-                h4,
+                h4 {
+                    color: #fff;
+                    font-size: 30px;
+                    margin-left: 10px !important;
+                }
                 h5 {
                     margin: 0;
                     text-align: center;
                 }
+
+                ul.types {
+                    display: flex;
+                    margin-left: 5px;
+                    margin-top: 20px;
+
+                    li {
+                        border: none;
+                        height: 25px;
+                        width: 25px;
+
+
+                        &.grass {
+                            background: url(images/types-pokemons/lg-ico-grass.png) no-repeat center /cover;
+                        }
+
+                        &.water {
+                            background: url(images/types-pokemons/lg-ico-water.png) no-repeat center /cover;
+                        }
+
+                        &.bug {
+                            background: url(images/types-pokemons/lg-ico-bug.png) no-repeat center /cover;
+                        }
+
+                        &.dark {
+                            background: url(images/types-pokemons/lg-ico-dark.png) no-repeat center /cover;
+                        }
+
+                        &.dragon {
+                            background: url(images/types-pokemons/lg-ico-dragon.png) no-repeat center /cover;
+                        }
+
+                        &.electric {
+                            background: url(images/types-pokemons/lg-ico-electric.png) no-repeat center /cover;
+                        }
+
+                        &.fairy {
+                            background: url(images/types-pokemons/lg-ico-fairy.png) no-repeat center /cover;
+                        }
+
+                        &.fight {
+                            background: url(images/types-pokemons/lg-ico-fight.png) no-repeat center /cover;
+                        }
+
+                        &.fire {
+                            background: url(images/types-pokemons/lg-ico-fire.png) no-repeat center /cover;
+                        }
+
+                        &.flying {
+                            background: url(images/types-pokemons/lg-ico-flying.png) no-repeat center /cover;
+                        }
+
+                        &.ghost {
+                            background: url(images/types-pokemons/lg-ico-ghost.png) no-repeat center /cover;
+                        }
+
+                        &.ground {
+                            background: url(images/types-pokemons/lg-ico-ground.png) no-repeat center /cover;
+                        }
+
+                        &.ice {
+                            background: url(images/types-pokemons/lg-ico-ice.png) no-repeat center /cover;
+                        }
+
+                        &.normal {
+                            background: url(images/types-pokemons/lg-ico-normal.png) no-repeat center /cover;
+                        }
+
+                        &.poison {
+                            background: url(images/types-pokemons/lg-ico-poison.png) no-repeat center /cover;
+                        }
+
+                        &.psychic {
+                            background: url(images/types-pokemons/lg-ico-psychic.png) no-repeat center /cover;
+                        }
+
+                        &.rock {
+                            background: url(images/types-pokemons/lg-ico-rock.png) no-repeat center /cover;
+                        }
+
+                        &.steel {
+                            background: url(images/types-pokemons/lg-ico-steel.png) no-repeat center /cover;
+                        }
+
+                    }
+                }
             }
-            &.hide{
+
+            &.hide {
                 display: none;
             }
         }
-        img.loader{
+
+        img.loader {
             display: flex;
             margin: 8rem auto;
             width: 200px;
-            &.hide{
+
+            &.hide {
                 display: none;
             }
+        }
+
+        .pokemon1 {
+            width: 380px;
+            height: 700px;
+            background: url(images/pokedex/pokemon1.png);
+        }
+
+        .text {
+            text-align: center;
+            justify-items: center;
+            font-size: 50px;
+            font-family: Poppins;
+            position: relative;
+            top: 70px;
+        }
+
+        .button {
+            left: 20px;
+            width: 340px;
+            height: 70px;
+            font-size: 30px;
+            color: aliceblue;
+            background-color: #920000;
+            position: relative;
+            top: 550px;
+            border-radius: 15px;
+        }
+
+        .pokemon2 {
+            width: 380px;
+            height: 700px;
+            background-color: black;
         }
     </style>
 </head>
@@ -70,6 +205,13 @@
             <h2>Obtén y muestra datos de la API de Pokedex.</h2>
 
         </header>
+
+
+        <div class="pokemon1">
+            <h4 class="text">Pokédex</h4>
+            <button id="pokemon2" class="button">Ingresar</button>
+        </div>
+
         <section>
             <select class="pk-generation">
             </select>
@@ -77,6 +219,10 @@
             <ul class="pokemons"></ul>
 
         </section>
+
+        <div class="type"></div>
+        </h4>
+
     </main>
     <script>
         // objects
@@ -120,7 +266,7 @@
 
         // select
         const pkGeneration = document.querySelector('.pk-generation')
-        pkGeneration.innerHTML = `<option value="">Select a Gerenation...</option>`
+        pkGeneration.innerHTML = `<option value="" style="display:none">Select a Gerenation...</option>`
         generations['range'].forEach((element, index) => {
             pkGeneration.innerHTML += `<option value= "${index}">Select a Generation ${++index}</option>`
         });
@@ -151,13 +297,24 @@
                 const response = await fetch(url)
                 const data = await response.json()
 
-                //console.log(data)
+                console.log(data)
                 const typeColor = data.types[0].type.name
+
+                let typesLi = ''
+                if (data.types.length > 1) {
+                    typesLi = `<li class="${data.types[0].type.name}"></li><li class="${data.types[1].type.name}"></li>`
+                } else {
+                    typesLi = `<li class="${data.types[0].type.name}"></li>`
+                }
+
+
+
                 pokemons.innerHTML += `<li style="border-color: ${types[typeColor]};
                                             background: linear-gradient(black, ${types[typeColor]})">
-                                            ${data.id}  
                                             ${data.name}
+                                            <ul class="types">${typesLi}</ul>
                                             <img src="${data.sprites.front_default}">
+                                            <h4 class="numero"># ${data.id}</h4>
                                             </li>`
             }
         }
