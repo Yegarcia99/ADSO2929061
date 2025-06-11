@@ -7,12 +7,6 @@
     <title>18-pokedex-api</title>
     <link rel="stylesheet" href="../css/styles.css">
     <style>
-        main section {
-            background-color: rgb(0, 0, 0) !important;
-            width: 380px;
-            height: 700px;
-        }
-
         select.pk-generation {
             appearance: none;
             padding: 0.4rem 0.8rem;
@@ -36,128 +30,78 @@
 
 
             li {
-                border: 2px solid rgba(255, 255, 255, 0.6);
+                border: none;
                 border-radius: 0.4rem;
 
                 h4 {
-                    color: #fff;
+                    color: #ffffff;
                     font-size: 30px;
                     margin-left: 10px !important;
+                    margin-top: -50px;
                 }
+
                 h5 {
                     margin: 0;
                     text-align: center;
                 }
 
-                ul.types {
-                    display: flex;
-                    margin-left: 5px;
-                    margin-top: 20px;
-
-                    li {
-                        border: none;
-                        height: 25px;
-                        width: 25px;
-
-
-                        &.grass {
-                            background: url(images/types-pokemons/lg-ico-grass.png) no-repeat center /cover;
-                        }
-
-                        &.water {
-                            background: url(images/types-pokemons/lg-ico-water.png) no-repeat center /cover;
-                        }
-
-                        &.bug {
-                            background: url(images/types-pokemons/lg-ico-bug.png) no-repeat center /cover;
-                        }
-
-                        &.dark {
-                            background: url(images/types-pokemons/lg-ico-dark.png) no-repeat center /cover;
-                        }
-
-                        &.dragon {
-                            background: url(images/types-pokemons/lg-ico-dragon.png) no-repeat center /cover;
-                        }
-
-                        &.electric {
-                            background: url(images/types-pokemons/lg-ico-electric.png) no-repeat center /cover;
-                        }
-
-                        &.fairy {
-                            background: url(images/types-pokemons/lg-ico-fairy.png) no-repeat center /cover;
-                        }
-
-                        &.fight {
-                            background: url(images/types-pokemons/lg-ico-fight.png) no-repeat center /cover;
-                        }
-
-                        &.fire {
-                            background: url(images/types-pokemons/lg-ico-fire.png) no-repeat center /cover;
-                        }
-
-                        &.flying {
-                            background: url(images/types-pokemons/lg-ico-flying.png) no-repeat center /cover;
-                        }
-
-                        &.ghost {
-                            background: url(images/types-pokemons/lg-ico-ghost.png) no-repeat center /cover;
-                        }
-
-                        &.ground {
-                            background: url(images/types-pokemons/lg-ico-ground.png) no-repeat center /cover;
-                        }
-
-                        &.ice {
-                            background: url(images/types-pokemons/lg-ico-ice.png) no-repeat center /cover;
-                        }
-
-                        &.normal {
-                            background: url(images/types-pokemons/lg-ico-normal.png) no-repeat center /cover;
-                        }
-
-                        &.poison {
-                            background: url(images/types-pokemons/lg-ico-poison.png) no-repeat center /cover;
-                        }
-
-                        &.psychic {
-                            background: url(images/types-pokemons/lg-ico-psychic.png) no-repeat center /cover;
-                        }
-
-                        &.rock {
-                            background: url(images/types-pokemons/lg-ico-rock.png) no-repeat center /cover;
-                        }
-
-                        &.steel {
-                            background: url(images/types-pokemons/lg-ico-steel.png) no-repeat center /cover;
-                        }
-
-                    }
-                }
             }
-
+            
             &.hide {
                 display: none;
             }
         }
-
+        
         img.loader {
             display: flex;
             margin: 8rem auto;
             width: 200px;
-
+            
             &.hide {
                 display: none;
             }
         }
-
-        .pokemon1 {
+        
+        img.poke {
+            margin-left: 60px;
+            width: 110px;
+            height: 110px;
+            margin-top: -20px;
+        }
+        
+        .cards {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            /* Para centrar verticalmente */
+        }
+        
+        .card1 {
             width: 380px;
             height: 700px;
             background: url(images/pokedex/pokemon1.png);
+            transition: transform 0.6s ease;
+            transform: translateX(0%);
+            z-index: 2;
+            position: absolute;
+            
         }
-
-        .text {
+        
+        .card2 {
+            width: 380px;
+            height: 700px;
+            background-color: black;
+            position: absolute;
+            transition: transform 0.6s ease;
+            transform: translateX(800px);
+            z-index: 1;
+        }
+        
+         .text {
             text-align: center;
             justify-items: center;
             font-size: 50px;
@@ -166,7 +110,7 @@
             top: 70px;
         }
 
-        .button {
+        button {
             left: 20px;
             width: 340px;
             height: 70px;
@@ -178,10 +122,124 @@
             border-radius: 15px;
         }
 
-        .pokemon2 {
+        .card3 {
             width: 380px;
             height: 700px;
-            background-color: black;
+            background-color: #000000;
+            right: 0;
+            margin-bottom: 40px;
+            transform: translateX(600px);
+            transition: transform 0.6s ease;
+            color: rgb(252, 246, 246);
+            padding: 1rem;
+            overflow-y: auto;
+        }
+        
+        .card3.show {
+            transform: translateX(0);
+            /* Que se vea completamente */
+            z-index: 3;
+        }
+
+        .card3 img.poke {
+            display: block;
+            margin: 10px auto;
+            width: 300px;
+            height: 300px;
+        }
+        
+        .h2 {
+            color: #ffffff !important;
+        }
+        
+        .types {
+            display: flex;
+            margin-left: 15px;
+            margin-bottom: -50px;
+            width: 74px;
+            height: 74px;
+            margin: none;
+
+
+            li {
+                border: none;
+                height: 25px;
+                width: 25px;
+                margin-bottom: -50px;
+
+                &.grass {
+                    background: url(images/types-pokemons/lg-ico-grass.png) no-repeat center /cover;
+                }
+
+                &.water {
+                    background: url(images/types-pokemons/lg-ico-water.png) no-repeat center /cover;
+                }
+
+                &.bug {
+                    background: url(images/types-pokemons/lg-ico-bug.png) no-repeat center /cover;
+                }
+
+                &.dark {
+                    background: url(images/types-pokemons/lg-ico-dark.png) no-repeat center /cover;
+                }
+
+                &.dragon {
+                    background: url(images/types-pokemons/lg-ico-dragon.png) no-repeat center /cover;
+                }
+
+                &.electric {
+                    background: url(images/types-pokemons/lg-ico-electric.png) no-repeat center /cover;
+                }
+
+                &.fairy {
+                    background: url(images/types-pokemons/lg-ico-fairy.png) no-repeat center /cover;
+                }
+
+                &.fight {
+                    background: url(images/types-pokemons/lg-ico-fight.png) no-repeat center /cover;
+                }
+
+                &.fire {
+                    background: url(images/types-pokemons/lg-ico-fire.png) no-repeat center /cover;
+                }
+
+                &.flying {
+                    background: url(images/types-pokemons/lg-ico-flying.png) no-repeat center /cover;
+                }
+
+                &.ghost {
+                    background: url(images/types-pokemons/lg-ico-ghost.png) no-repeat center /cover;
+                }
+
+                &.ground {
+                    background: url(images/types-pokemons/lg-ico-ground.png) no-repeat center /cover;
+                }
+
+                &.ice {
+                    background: url(images/types-pokemons/lg-ico-ice.png) no-repeat center /cover;
+                }
+
+                &.normal {
+                    background: url(images/types-pokemons/lg-ico-normal.png) no-repeat center /cover;
+                }
+
+                &.poison {
+                    background: url(images/types-pokemons/lg-ico-poison.png) no-repeat center /cover;
+                }
+
+                &.psychic {
+                    background: url(images/types-pokemons/lg-ico-psychic.png) no-repeat center /cover;
+                }
+
+                &.rock {
+                    background: url(images/types-pokemons/lg-ico-rock.png) no-repeat center /cover;
+                }
+
+                &.steel {
+                    background: url(images/types-pokemons/lg-ico-steel.png) no-repeat center /cover;
+                }
+
+            }
         }
     </style>
 </head>
@@ -206,22 +264,27 @@
 
         </header>
 
+        <div class="cards">
+            <div id="card1" class="card1">
+                <h4 class="text">Pokédex</h4>
+                <button class="button">
+                    <a href="#card2" class="button">Ingresar </a>
+                </button>
+            </div>
 
-        <div class="pokemon1">
-            <h4 class="text">Pokédex</h4>
-            <button id="pokemon2" class="button">Ingresar</button>
+            <div id="card2" class="card2">
+                <select class="pk-generation">
+                </select>
+                <img class="loader" src="images/loader.gif" alt="">
+                <ul class="pokemons"></ul>
+            </div>
+
+            <div class="card3"></div>
+
         </div>
 
-        <section>
-            <select class="pk-generation">
-            </select>
-            <img class="loader" src="images/loader.gif" alt="">
-            <ul class="pokemons"></ul>
 
-        </section>
 
-        <div class="type"></div>
-        </h4>
 
     </main>
     <script>
@@ -309,17 +372,105 @@
 
 
 
-                pokemons.innerHTML += `<li style="border-color: ${types[typeColor]};
-                                            background: linear-gradient(black, ${types[typeColor]})">
-                                            ${data.name}
-                                            <ul class="types">${typesLi}</ul>
-                                            <img src="${data.sprites.front_default}">
-                                            <h4 class="numero"># ${data.id}</h4>
-                                            </li>`
+                pokemons.innerHTML += `<li data-name="${data.name}" style="border-color: ${types[typeColor]};
+                        margin: 10px;
+                        width: 160px;
+                        height: 130px;
+                        background: linear-gradient(black, ${types[typeColor]})">
+                        ${data.name}
+                        <ul class="types">${typesLi}</ul>
+                        <img class="poke" src="${data.sprites.front_default}">
+                        <h4 class="numero"># ${data.id}</h4>
+                    </li>`;
             }
         }
-        loadPokemons(1, 151)
 
+        function mostrarStats(nombre) {
+            fetch(`https://pokeapi.co/api/v2/pokemon/${nombre}`)
+                .then(res => res.json())
+                .then(data => {
+                    const statsHtml = data.stats.map(stat => {
+                        return `<p><strong>${stat.stat.name}:</strong> ${stat.base_stat}</p>`;
+                    }).join('');
+
+                    const card3 = document.querySelector('.card3');
+                    card3.innerHTML = `
+                    
+                    <h4 class="text" >${data.name.toUpperCase()}</h4>
+                    <img src="${data.sprites.front_default}" alt="${data.name}" class="poke">
+                    ${statsHtml}
+                  
+                `;
+                    card3.classList.add('show');
+                });
+        }
+        loadPokemons(1, 151)
+        const card3 = document.querySelector('.card3');
+        pokemons.addEventListener('click', async (e) => {
+    const li = e.target.closest('li');
+    if (!li) return;
+
+    const nombre = li.dataset.name;
+    const url = `https://pokeapi.co/api/v2/pokemon/${nombre}`;
+    const res = await fetch(url);
+    const data = await res.json();
+
+    // Crear HTML de tipos con clases (para que cargue las imágenes CSS)
+    let typesHTML = `<ul class="types">`;
+    data.types.forEach(t => {
+        typesHTML += `<li class="${t.type.name}"></li>`;
+    });
+    typesHTML += `</ul>`;
+
+    // Crear HTML de stats
+    // Crear HTML de stats con barras
+const statsHTML = data.stats.map(stat => {
+    const value = stat.base_stat;
+    return `
+        <div style="margin-bottom: 10px;">
+            <strong>${stat.stat.name.toUpperCase()}:</strong> ${value}
+            <div style="width: 100%; background: #333; border-radius: 10px; overflow: hidden; height: 14px;">
+                <div style="width: ${value > 100 ? 100 : value}%; background: #4CAF50; height: 100%;"></div>
+            </div>
+        </div>
+    `;
+}).join('');
+
+    // Mostrar en card3
+    card3.innerHTML = `
+    <button id="btn-volver" style="
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background-color: rgba(255,255,255,0.1);
+        border: none;
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        font-size: 20px;
+        color: white;
+        cursor: pointer;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    ">&larr;</button>
+
+    <h2 class="h2">${data.name.toUpperCase()}</h2>
+    <img src="${data.sprites.front_default}" class="poke" alt="${data.name}">
+    ${typesHTML}
+    ${statsHTML}
+`;
+    card3.classList.add('show');
+    document.getElementById('btn-volver').addEventListener('click', () => {
+    card3.classList.remove('show');
+    document.getElementById('card1').style.display = 'block';
+    document.getElementById('card2').style.display = 'block';
+});
+    // Ocultar card2 y card1 para mostrar solo card3
+    document.getElementById('card1').style.display = 'none';
+    document.getElementById('card2').style.display = 'none';
+});
     </script>
 </body>
 
