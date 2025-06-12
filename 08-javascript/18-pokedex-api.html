@@ -46,29 +46,29 @@
                 }
 
             }
-            
+
             &.hide {
                 display: none;
             }
         }
-        
+
         img.loader {
             display: flex;
             margin: 8rem auto;
             width: 200px;
-            
+
             &.hide {
                 display: none;
             }
         }
-        
+
         img.poke {
             margin-left: 60px;
             width: 110px;
             height: 110px;
             margin-top: -20px;
         }
-        
+
         .cards {
             display: flex;
             justify-content: center;
@@ -79,7 +79,7 @@
             min-height: 100vh;
             /* Para centrar verticalmente */
         }
-        
+
         .card1 {
             width: 380px;
             height: 700px;
@@ -88,9 +88,9 @@
             transform: translateX(0%);
             z-index: 2;
             position: absolute;
-            
+
         }
-        
+
         .card2 {
             width: 380px;
             height: 700px;
@@ -100,8 +100,8 @@
             transform: translateX(800px);
             z-index: 1;
         }
-        
-         .text {
+
+        .text {
             text-align: center;
             justify-items: center;
             font-size: 50px;
@@ -116,7 +116,7 @@
             height: 70px;
             font-size: 30px;
             color: aliceblue;
-            background-color: #920000;
+            background-color: #ffffff;
             position: relative;
             top: 550px;
             border-radius: 15px;
@@ -133,8 +133,10 @@
             color: rgb(252, 246, 246);
             padding: 1rem;
             overflow-y: auto;
+
+
         }
-        
+
         .card3.show {
             transform: translateX(0);
             /* Que se vea completamente */
@@ -147,99 +149,114 @@
             width: 300px;
             height: 300px;
         }
-        
+
         .h2 {
             color: #ffffff !important;
         }
-        
+
+
+
         .types {
+            position: absolute;
             display: flex;
             margin-left: 15px;
             margin-bottom: -50px;
             width: 74px;
             height: 74px;
             margin: none;
+        }
+
+        .type {
+            position: relative;
+            display: flex;
+            margin-left: 100px;
+            top: -150px;
+            width: 74px;
+            height: 74px;
+            margin: none;
+        }
+
+        li {
+            position: relative;
+            border: none;
+            height: 25px;
+            width: 25px;
+            top: -150px;
+            list-style: none;
 
 
-            li {
-                border: none;
-                height: 25px;
-                width: 25px;
-                margin-bottom: -50px;
-
-                &.grass {
-                    background: url(images/types-pokemons/lg-ico-grass.png) no-repeat center /cover;
-                }
-
-                &.water {
-                    background: url(images/types-pokemons/lg-ico-water.png) no-repeat center /cover;
-                }
-
-                &.bug {
-                    background: url(images/types-pokemons/lg-ico-bug.png) no-repeat center /cover;
-                }
-
-                &.dark {
-                    background: url(images/types-pokemons/lg-ico-dark.png) no-repeat center /cover;
-                }
-
-                &.dragon {
-                    background: url(images/types-pokemons/lg-ico-dragon.png) no-repeat center /cover;
-                }
-
-                &.electric {
-                    background: url(images/types-pokemons/lg-ico-electric.png) no-repeat center /cover;
-                }
-
-                &.fairy {
-                    background: url(images/types-pokemons/lg-ico-fairy.png) no-repeat center /cover;
-                }
-
-                &.fight {
-                    background: url(images/types-pokemons/lg-ico-fight.png) no-repeat center /cover;
-                }
-
-                &.fire {
-                    background: url(images/types-pokemons/lg-ico-fire.png) no-repeat center /cover;
-                }
-
-                &.flying {
-                    background: url(images/types-pokemons/lg-ico-flying.png) no-repeat center /cover;
-                }
-
-                &.ghost {
-                    background: url(images/types-pokemons/lg-ico-ghost.png) no-repeat center /cover;
-                }
-
-                &.ground {
-                    background: url(images/types-pokemons/lg-ico-ground.png) no-repeat center /cover;
-                }
-
-                &.ice {
-                    background: url(images/types-pokemons/lg-ico-ice.png) no-repeat center /cover;
-                }
-
-                &.normal {
-                    background: url(images/types-pokemons/lg-ico-normal.png) no-repeat center /cover;
-                }
-
-                &.poison {
-                    background: url(images/types-pokemons/lg-ico-poison.png) no-repeat center /cover;
-                }
-
-                &.psychic {
-                    background: url(images/types-pokemons/lg-ico-psychic.png) no-repeat center /cover;
-                }
-
-                &.rock {
-                    background: url(images/types-pokemons/lg-ico-rock.png) no-repeat center /cover;
-                }
-
-                &.steel {
-                    background: url(images/types-pokemons/lg-ico-steel.png) no-repeat center /cover;
-                }
-
+            &.grass {
+                background: url(images/types-pokemons/lg-ico-grass.png) no-repeat center /cover;
             }
+
+            &.water {
+                background: url(images/types-pokemons/lg-ico-water.png) no-repeat center /cover;
+            }
+
+            &.bug {
+                background: url(images/types-pokemons/lg-ico-bug.png) no-repeat center /cover;
+            }
+
+            &.dark {
+                background: url(images/types-pokemons/lg-ico-dark.png) no-repeat center /cover;
+            }
+
+            &.dragon {
+                background: url(images/types-pokemons/lg-ico-dragon.png) no-repeat center /cover;
+            }
+
+            &.electric {
+                background: url(images/types-pokemons/lg-ico-electric.png) no-repeat center /cover;
+            }
+
+            &.fairy {
+                background: url(images/types-pokemons/lg-ico-fairy.png) no-repeat center /cover;
+            }
+
+            &.fight {
+                background: url(images/types-pokemons/lg-ico-fight.png) no-repeat center /cover;
+            }
+
+            &.fire {
+                background: url(images/types-pokemons/lg-ico-fire.png) no-repeat center /cover;
+            }
+
+            &.flying {
+                background: url(images/types-pokemons/lg-ico-flying.png) no-repeat center /cover;
+            }
+
+            &.ghost {
+                background: url(images/types-pokemons/lg-ico-ghost.png) no-repeat center /cover;
+            }
+
+            &.ground {
+                background: url(images/types-pokemons/lg-ico-ground.png) no-repeat center /cover;
+            }
+
+            &.ice {
+                background: url(images/types-pokemons/lg-ico-ice.png) no-repeat center /cover;
+            }
+
+            &.normal {
+                background: url(images/types-pokemons/lg-ico-normal.png) no-repeat center /cover;
+            }
+
+            &.poison {
+                background: url(images/types-pokemons/lg-ico-poison.png) no-repeat center /cover;
+            }
+
+            &.psychic {
+                background: url(images/types-pokemons/lg-ico-psychic.png) no-repeat center /cover;
+            }
+
+            &.rock {
+                background: url(images/types-pokemons/lg-ico-rock.png) no-repeat center /cover;
+            }
+
+            &.steel {
+                background: url(images/types-pokemons/lg-ico-steel.png) no-repeat center /cover;
+            }
+
         }
     </style>
 </head>
@@ -395,8 +412,8 @@
 
                     const card3 = document.querySelector('.card3');
                     card3.innerHTML = `
-                    
                     <h4 class="text" >${data.name.toUpperCase()}</h4>
+                    <h4 class="numero"># ${data.id}</h4>
                     <img src="${data.sprites.front_default}" alt="${data.name}" class="poke">
                     ${statsHtml}
                   
@@ -407,37 +424,36 @@
         loadPokemons(1, 151)
         const card3 = document.querySelector('.card3');
         pokemons.addEventListener('click', async (e) => {
-    const li = e.target.closest('li');
-    if (!li) return;
+            const li = e.target.closest('li');
+            if (!li) return;
 
-    const nombre = li.dataset.name;
-    const url = `https://pokeapi.co/api/v2/pokemon/${nombre}`;
-    const res = await fetch(url);
-    const data = await res.json();
+            const nombre = li.dataset.name;
+            const url = `https://pokeapi.co/api/v2/pokemon/${nombre}`;
+            const res = await fetch(url);
+            const data = await res.json();
 
-    // Crear HTML de tipos con clases (para que cargue las imágenes CSS)
-    let typesHTML = `<ul class="types">`;
-    data.types.forEach(t => {
-        typesHTML += `<li class="${t.type.name}"></li>`;
-    });
-    typesHTML += `</ul>`;
 
-    // Crear HTML de stats
-    // Crear HTML de stats con barras
-const statsHTML = data.stats.map(stat => {
-    const value = stat.base_stat;
-    return `
-        <div style="margin-bottom: 10px;">
+            let typesHTML = `<ul class="type">`;
+            data.types.forEach(t => {
+                typesHTML += `<li class="${t.type.name}"></li>`;
+            });
+            typesHTML += `</ul>`;
+
+
+            const statsHTML = data.stats.map(stat => {
+                const value = stat.base_stat;
+                return `
+        <div style="position: relative; margin-bottom: 10px;">
             <strong>${stat.stat.name.toUpperCase()}:</strong> ${value}
             <div style="width: 100%; background: #333; border-radius: 10px; overflow: hidden; height: 14px;">
                 <div style="width: ${value > 100 ? 100 : value}%; background: #4CAF50; height: 100%;"></div>
             </div>
         </div>
     `;
-}).join('');
+            }).join('');
 
-    // Mostrar en card3
-    card3.innerHTML = `
+            // Mostrar en card3
+            card3.innerHTML = `
     <button id="btn-volver" style="
         position: absolute;
         top: 15px;
@@ -461,16 +477,16 @@ const statsHTML = data.stats.map(stat => {
     ${typesHTML}
     ${statsHTML}
 `;
-    card3.classList.add('show');
-    document.getElementById('btn-volver').addEventListener('click', () => {
-    card3.classList.remove('show');
-    document.getElementById('card1').style.display = 'block';
-    document.getElementById('card2').style.display = 'block';
-});
-    // Ocultar card2 y card1 para mostrar solo card3
-    document.getElementById('card1').style.display = 'none';
-    document.getElementById('card2').style.display = 'none';
-});
+            card3.classList.add('show');
+            document.getElementById('btn-volver').addEventListener('click', () => {
+                card3.classList.remove('show');
+                document.getElementById('card1').style.display = 'block';
+                document.getElementById('card2').style.display = 'block';
+            });
+            // Ocultar card2 y card1 para mostrar solo card3
+            document.getElementById('card1').style.display = 'none';
+            document.getElementById('card2').style.display = 'none';
+        });
     </script>
 </body>
 
