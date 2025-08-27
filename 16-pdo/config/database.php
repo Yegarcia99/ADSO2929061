@@ -120,4 +120,72 @@ function addPet($name, $specie_id, $breed_id, $sex_id, $photo, $conx)
         echo 'Error: ' . $e->getMessage();
     }
 }
+
+//function showPet
+function showPet($id, $conx)
+{
+    try {
+        $sql = "SELECT p.name as name,
+                        p.photo as photo,
+                        s.name as specie,
+                        b.name as breed,
+                        x.name as sex
+                FROM pets as p,
+                    species as s,
+                    breeds as b,
+                    sexes as x
+                WHERE s.id=p.specie_id
+                    AND b.id=p.breed_id
+                    AND p.id = :id";
+        $stmt = $conx->prepare($sql);
+        $stmt->bindparam(":id", $id);
+        $stmt->execute();
+        return $stmt->fetch();
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+}
+
+function deletePet($id, $conx)
+{
+    try {
+
+        // Paso 1: Obtener la ruta de la imagen
+        $sql_select = "SELECT photo FROM pets WHERE id = :id";
+        $stmt_select = $conx->prepare($sql_select);
+        $stmt_select->bindParam(":id", $id);
+        $stmt_select->execute();
+        $pet = $stmt_select->fetch(PDO::FETCH_ASSOC);
+
+        if ($pet) {
+            $imagePath = $pet['photo'];
+
+            $fullImagePath = '../uploads/' . $imagePath;
+
+
+            if (file_exists($fullImagePath) && !is_dir($fullImagePath)) {
+                unlink($fullImagePath);
+            }
+        }
+
+        $sql = "DELETE
+                FROM pets
+                WHERE id = :id";
+        $stmt = $conx->prepare($sql);
+        $stmt->bindparam(":id", $id);
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+}
+
+function editPet($id, $conx) {
+    try {
+        
+    }
+}
 ?>
