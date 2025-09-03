@@ -183,9 +183,46 @@ function deletePet($id, $conx)
     }
 }
 
-function editPet($id, $conx) {
+function listPet($id, $conx)
+{
     try {
-        
+        $sql = "SELECT id,
+                        name, 
+                        specie_id,
+                        breed_id,
+                        sex_id,
+                        photo
+                FROM pets
+                WHERE id= :id";
+        $stmt = $conx->prepare($sql);
+        $stmt->bindparam(":id", $id);
+        $stmt->execute();
+        return $stmt->fetch();
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+
+}
+
+
+function updatePet($id, $name, $specie_id, $breed_id, $sex_id, $photo, $conx)
+{
+    try {
+        $sql = "UPDATE pets SET name=:name, specie_id=:specie_id, breed_id=:breed_id, sex_id=:sex_id, photo=:photo WHERE id=:id";
+        $stmt = $conx->prepare($sql);
+        $stmt->bindparam(':name', $name);
+        $stmt->bindparam(':specie_id', $specie_id);
+        $stmt->bindparam(':breed_id', $breed_id);
+        $stmt->bindparam(':sex_id', $sex_id);
+        $stmt->bindparam(':photo', $photo);
+        $stmt->bindparam(':id', $id);
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (PDOException $e) {
+        echo 'Error: ' . $e->getMessage();
     }
 }
 ?>
