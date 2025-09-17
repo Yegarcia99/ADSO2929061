@@ -39,14 +39,14 @@
             text-shadow: 1px 1px 0px #fff;
             margin: 0;
         }
-        
+
         /* Contenedores de las secciones */
         section {
-            display: none; /* Ambas secciones ocultas por defecto */
+            display: none;
         }
-        
+
         section.active {
-            display: block; /* Muestra la sección activa */
+            display: block;
         }
 
         /* ESTILOS DE LA PRIMERA SECCIÓN */
@@ -163,91 +163,82 @@
             z-index: 10;
         }
 
-        .health-bar {
+        /* Estilos para el panel de información superior */
+        .info-panel {
             position: absolute;
             top: 20px;
             left: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+            z-index: 10;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .timer-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .timer-label,
+        .health-label {
+            font-size: 1.2em;
+            text-shadow: 1px 1px 0px #000;
+        }
+
+        .timer-fill {
             width: 150px;
             height: 20px;
             border: 2px solid #fff;
             border-radius: 10px;
             background-color: #555;
-            z-index: 10;
-            overflow: hidden;
-        }
-
-        .health-fill {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to right, #ff0000, #ff8c00);
             transition: width 0.3s ease-in-out;
         }
 
-        /* Estilo del enemigo y la nave del jugador */
-        .enemy {
-            position: absolute;
-            top: 150px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: auto;
-            z-index: 5;
-            animation: floating 3s ease-in-out infinite;
+        .health-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        @keyframes floating {
-            0% { transform: translate(-50%, 0); }
-            50% { transform: translate(-50%, -10px); }
-            100% { transform: translate(-50%, 0); }
+        .health-hearts img {
+            width: 30px;
+            height: 30px;
         }
 
         /* Estilo para la nave del jugador en la segunda sección */
         #player-ship {
             position: absolute;
-            bottom: 30px; /* Posición de la nave en la parte inferior */
+            bottom: 30px;
             left: 140px;
-            width: 80px;
+            width: 35px;
             height: auto;
             transition: left 0.2s ease-in;
             z-index: 10;
         }
-        
-        /* Estilo y animación para los mundos que bajan */
+
+        /* Estilo para los mundos que caen, generados dinámicamente */
         .world {
             position: absolute;
-            width: 80px;
+            top: -50px;
+            width: 30px;
             height: auto;
             z-index: 5;
-            animation-timing-function: linear;
-            animation-iteration-count: infinite;
-            animation-name: moveDown;
+            transition: top linear;
         }
 
-        #world-1 {
-            left: 20%;
-            animation-duration: 8s;
-            animation-delay: 0s;
-        }
-
-        #world-2 {
-            left: 70%;
-            animation-duration: 10s;
-            animation-delay: -2s;
-        }
-
-        #world-3 {
-            left: 45%;
-            animation-duration: 7s;
-            animation-delay: -4s;
-        }
-
-        @keyframes moveDown {
-            from {
-                top: -100px;
-            }
-            to {
-                top: 100%;
-            }
+        /* Estilo para la explosión */
+        .explosion {
+            position: absolute;
+            width: 80px; /* Ajusta el tamaño según tu sprite */
+            height: 80px; /* Ajusta el tamaño según tu sprite */
+            z-index: 12;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.1s ease-out;
         }
     </style>
 </head>
@@ -280,129 +271,274 @@
         <section id="section-two">
             <figure class="one">
                 <span class="score-display">00000</span>
-                <div class="health-bar">
-                    <div class="health-fill"></div>
+                <div class="info-panel">
+                    <div class="timer-bar">
+                        <span class="timer-label">TIME</span>
+                        <div class="timer-fill"></div>
+                    </div>
+                    <div class="health-container">
+                        <span class="health-label">VIDA</span>
+                        <div class="health-hearts">
+                            <img src="images/vida.png" alt="Vida">
+                            <img src="images/vida.png" alt="Vida">
+                            <img src="images/vida.png" alt="Vida">
+                        </div>
+                    </div>
                 </div>
                 <img src="images/nave1.svg" id="player-ship" alt="Nave del jugador">
-                <img src="images/mundo1.png" class="world" id="world-1" alt="Mundo">
-                <img src="images/mundo2.png" class="world" id="world-2" alt="Mundo">
-                <img src="images/mundo3.png" class="world" id="world-3" alt="Mundo">
-                </figure>
+            </figure>
         </section>
     </main>
     <script>
-        const sectionOne = document.getElementById('section-one');
-        const sectionTwo = document.getElementById('section-two');
-        const btnStart = document.getElementById('btn-start');
+        document.addEventListener('DOMContentLoaded', () => {
 
-        const naveSelectorImage = document.querySelector('.weapons-selector .nave-display');
-        const playerShip = document.getElementById('player-ship');
-        const btnPrev = document.querySelector('.btn-prev');
-        const btnNext = document.querySelector('.btn-next');
+            const sectionOne = document.getElementById('section-one');
+            const sectionTwo = document.getElementById('section-two');
+            const btnStart = document.getElementById('btn-start');
 
-        const naves = {
-            attrs: [
-                { color: 'Red', image: 'images/nave1.svg' },
-                { color: 'White', image: 'images/nave2.svg' },
-                { color: 'Blue', image: 'images/nave3.svg' },
-            ]
-        };
+            const naveSelectorImage = document.querySelector('.weapons-selector .nave-display');
+            const playerShip = document.getElementById('player-ship');
+            const btnPrev = document.querySelector('.btn-prev');
+            const btnNext = document.querySelector('.btn-next');
+            const gameSection = document.querySelector('figure.one');
 
-        let inx = 0;
+            const naves = {
+                attrs: [
+                    { color: 'Red', image: 'images/nave1.svg' },
+                    { color: 'White', image: 'images/nave2.svg' },
+                    { color: 'Blue', image: 'images/nave3.svg' },
+                ]
+            };
 
-        const updateNaveImage = () => {
-            naveSelectorImage.src = naves.attrs[inx].image;
-            playerShip.src = naves.attrs[inx].image;
-        };
+            let inx = 0;
+            let isInvincible = false;
+            let posX = 140;
 
-        btnNext.addEventListener('click', () => {
-            if (inx < naves.attrs.length - 1) {
-                inx++;
-                updateNaveImage();
-                btnPrev.style.opacity = '1';
-                btnPrev.style.pointerEvents = 'all';
+            const worldImages = [
+                'images/mundo1.svg',
+                'images/mundo2.svg',
+                'images/mundo3.svg',
+                'images/mundo4.svg',
+                'images/mundo5.svg'
+            ];
 
-                if (inx === naves.attrs.length - 1) {
-                    btnNext.style.opacity = '0.2';
-                    btnNext.style.pointerEvents = 'none';
+            let score = 0;
+            let health = 3;
+            let timeLeft = 60;
+            let timerInterval;
+            let worldGenerationInterval;
+            let collisionInterval;
+
+            const updateNaveImage = () => {
+                naveSelectorImage.src = naves.attrs[inx].image;
+                playerShip.src = naves.attrs[inx].image;
+            };
+
+            btnNext.addEventListener('click', () => {
+                if (inx < naves.attrs.length - 1) {
+                    inx++;
+                    updateNaveImage();
+                    btnPrev.style.opacity = '1';
+                    btnPrev.style.pointerEvents = 'all';
+
+                    if (inx === naves.attrs.length - 1) {
+                        btnNext.style.opacity = '0.2';
+                        btnNext.style.pointerEvents = 'none';
+                    }
                 }
-            }
-        });
+            });
 
-        btnPrev.addEventListener('click', () => {
-            if (inx > 0) {
-                inx--;
-                updateNaveImage();
-                btnNext.style.opacity = '1';
-                btnNext.style.pointerEvents = 'all';
+            btnPrev.addEventListener('click', () => {
+                if (inx > 0) {
+                    inx--;
+                    updateNaveImage();
+                    btnNext.style.opacity = '1';
+                    btnNext.style.pointerEvents = 'all';
 
-                if (inx === 0) {
-                    btnPrev.style.opacity = '0.2';
-                    btnPrev.style.pointerEvents = 'none';
+                    if (inx === 0) {
+                        btnPrev.style.opacity = '0.2';
+                        btnPrev.style.pointerEvents = 'none';
+                    }
                 }
-            }
-        });
+            });
 
-        let posX = 140;
+            window.addEventListener('keyup', event => {
+                if (sectionTwo.classList.contains('active')) {
+                    const character = playerShip;
+                    const containerWidth = gameSection.offsetWidth;
+                    const shipWidth = character.offsetWidth;
 
-        btnStart.addEventListener('click', () => {
-            sectionOne.classList.remove('active');
-            sectionTwo.classList.add('active');
-            // Oculta el encabezado en la vista de juego
-            document.querySelector('header').style.display = 'none';
-        });
-
-        window.addEventListener('keyup', event => {
-            if (sectionTwo.classList.contains('active')) {
-                const character = playerShip;
-                if (event.code === 'ArrowLeft') {
-                    if (posX > -60) {
+                    if (event.code === 'ArrowLeft') {
                         posX -= 40;
-                        character.style.transform = `translateX(${posX}px)`;
-                    } else {
-                        posX = 340;
+                        if (posX < 0) {
+                            posX = 0;
+                        }
                     }
-                    character.style.left = `${posX}px`;
-                }
 
-                if (event.code === 'ArrowRight') {
-                    if (posX < 340) {
+                    if (event.code === 'ArrowRight') {
                         posX += 40;
-                        character.style.transform = `translateX(${posX}px)`;
-                    } else {
-                        posX = -60;
+                        if (posX > containerWidth - shipWidth) {
+                            posX = containerWidth - shipWidth;
+                        }
                     }
                     character.style.left = `${posX}px`;
                 }
-            }
+            });
+
+            updateNaveImage();
+            btnPrev.style.opacity = '0.2';
+            btnPrev.style.pointerEvents = 'none';
+
+            // --- Lógica del juego ---
+            const scoreDisplay = document.querySelector('.score-display');
+            const timerFill = document.querySelector('.timer-fill');
+            const healthHearts = document.querySelector('.health-hearts');
+
+            const showExplosion = (x, y) => {
+                const explosion = document.createElement('img');
+                explosion.src = 'images/explosion.gif';
+                explosion.classList.add('explosion');
+                explosion.style.left = `${x - 40}px`;
+                explosion.style.top = `${y - 40}px`;
+                gameSection.appendChild(explosion);
+                
+                setTimeout(() => {
+                    explosion.style.opacity = 1;
+                }, 10);
+
+                setTimeout(() => {
+                    explosion.style.opacity = 0;
+                    explosion.addEventListener('transitionend', () => explosion.remove());
+                }, 500);
+            };
+
+            const createWorld = () => {
+                const world = document.createElement('img');
+                const randomImage = worldImages[Math.floor(Math.random() * worldImages.length)];
+                const randomPosition = Math.random() * (gameSection.offsetWidth - 60);
+
+                world.src = randomImage;
+                world.classList.add('world');
+                world.style.left = `${randomPosition}px`;
+                gameSection.appendChild(world);
+
+                let currentTop = -50;
+                const fallInterval = setInterval(() => {
+                    currentTop += 2;
+                    world.style.top = `${currentTop}px`;
+
+                    if (currentTop > gameSection.offsetHeight) {
+                        world.remove();
+                        clearInterval(fallInterval);
+                        updateScore(10);
+                    }
+                }, 20);
+            };
+
+            const startWorldGeneration = () => {
+                worldGenerationInterval = setInterval(() => {
+                    createWorld();
+                }, 1000);
+            };
+
+            const checkCollisions = () => {
+                const worlds = document.querySelectorAll('.world');
+                const playerRect = playerShip.getBoundingClientRect();
+                const gameRect = gameSection.getBoundingClientRect();
+
+                worlds.forEach(world => {
+                    const worldRect = world.getBoundingClientRect();
+
+                    if (playerRect.left < worldRect.right &&
+                        playerRect.right > worldRect.left &&
+                        playerRect.top < worldRect.bottom &&
+                        playerRect.bottom > worldRect.top) {
+
+                        if (!isInvincible) {
+                            updateHealth(1);
+                            
+                            const collisionX = (playerRect.left + playerRect.right) / 2 - gameRect.left;
+                            const collisionY = (playerRect.top + playerRect.bottom) / 2 - gameRect.top;
+                            showExplosion(collisionX, collisionY);
+
+                            world.remove();
+                            isInvincible = true;
+                            playerShip.style.opacity = 0.5;
+
+                            setTimeout(() => {
+                                isInvincible = false;
+                                playerShip.style.opacity = 1;
+                            }, 1500);
+                        }
+                    }
+                });
+            };
+
+            const updateScore = (points) => {
+                score += points;
+                scoreDisplay.textContent = String(score).padStart(5, '0');
+            };
+
+            const updateHealth = (damage) => {
+                health -= damage;
+                if (health < 0) health = 0;
+
+                const hearts = healthHearts.querySelectorAll('img');
+                hearts.forEach((heart, index) => {
+                    if (index >= health) {
+                        heart.style.opacity = '0.3';
+                    } else {
+                        heart.style.opacity = '1';
+                    }
+                });
+
+                if (health === 0) {
+                    endGame();
+                }
+            };
+
+            const startTimer = () => {
+                timerInterval = setInterval(() => {
+                    timeLeft--;
+                    const timerWidth = (timeLeft / 60) * 150;
+                    timerFill.style.width = timerWidth + 'px';
+
+                    if (timeLeft <= 0) {
+                        clearInterval(timerInterval);
+                        endGame();
+                    }
+                }, 1000);
+            };
+
+            const endGame = () => {
+                alert(`¡Juego Terminado! Tu puntuación final es: ${score}.`);
+                sectionOne.classList.add('active');
+                sectionTwo.classList.remove('active');
+                document.querySelector('header').style.display = 'block';
+
+                document.querySelectorAll('.world').forEach(world => world.remove());
+                clearInterval(worldGenerationInterval);
+                clearInterval(timerInterval);
+                clearInterval(collisionInterval);
+
+                score = 0;
+                health = 3;
+                timeLeft = 60;
+                scoreDisplay.textContent = '00000';
+                timerFill.style.width = '150px';
+                const hearts = healthHearts.querySelectorAll('img');
+                hearts.forEach(heart => heart.style.opacity = '1');
+            };
+
+            btnStart.addEventListener('click', () => {
+                sectionOne.classList.remove('active');
+                sectionTwo.classList.add('active');
+                document.querySelector('header').style.display = 'none';
+                startTimer();
+                startWorldGeneration();
+                collisionInterval = setInterval(checkCollisions, 50);
+            });
         });
-
-        updateNaveImage();
-        btnPrev.style.opacity = '0.2';
-        btnPrev.style.pointerEvents = 'none';
-
-        // JavaScript para la segunda sección (sin cambios)
-        const scoreDisplay = document.querySelector('.score-display');
-        const healthFill = document.querySelector('.health-fill');
-        const enemy = document.querySelector('.enemy');
-        const gameSection = document.querySelector('figure.one');
-
-        let score = 0;
-        let health = 100;
-
-        const updateScore = (points) => {
-            score += points;
-            scoreDisplay.textContent = String(score).padStart(5, '0');
-        };
-
-        const updateHealth = (damage) => {
-            health -= damage;
-            if (health < 0) health = 0;
-            healthFill.style.width = health + '%';
-            if (health === 0) {
-                alert('Game Over!');
-            }
-        };
     </script>
 </body>
 
