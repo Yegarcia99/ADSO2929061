@@ -3,31 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>00- Template</title>
+    <title>05-events</title>
     <link rel="stylesheet" href="../css/styles.css">
-    
-<section class="section">
-    <h4>Mouse Events:</h4>
-    <h3>MouseEnter & MouseLeave</h3>
-    <figure>
-        <img src="images/maomao.png" alt="MaoMao">
-    </figure>
-    <h4>Keyboard Events:</h4>
-    <h3>KeyUp</h3>
-    <article class="landscape">
-        <img src="images/goku.png" class="goku" alt="Goku">
-        <small>Press arrow keys: &larr; &uarr; &rarr; &darr; to move</small>
-    </article>
-    <h4>Form Events:</h4>
-    <h3>Change</h3>
-    <select class="emoji">
-        <option value="❔">Select emotion...</option>
-        <option value="🙁">Sad</option>
-        <option value="😡">Angry</option>
-        <option value="😊">Happy</option>
-    </select>
-    <output class="emotion">❔</output>
-</section>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
 </head>
 <body class="css">
     <nav>
@@ -40,8 +19,8 @@
     </nav>
     <main>
         <header>
-            <h1>00- Template</h1>
-            <h2>Description</h2>
+            <h1>05-events</h1>
+            <h2>Maneja interacciones de usuario como clics y pulsaciones de teclas.</h2>
             
         </header>
       <section class="section">
@@ -67,5 +46,61 @@
     <output class="emotion">❔</output>
 </section>
     </main>
+    <script>
+        // 05
+$(document).ready(function() {
+            // MouseEnter & MouseLeave
+            $('figure').mouseenter(function(e) {
+                $(this).css('filter', 'grayscale(0)')
+                $(this).children('img').css('transform', 'scale(1)')
+            })
+
+            $('figure').mouseleave(function(e) {
+                $(this).css('filter', 'grayscale(1)')
+                $(this).children('img').css('transform', 'scale(1.6)')
+            })
+
+            // KeyUp
+            $top  = 100
+            $left = 100
+            $(document).keyup(function(e) {
+                e.preventDefault()
+                switch (e.key) {
+                    case 'ArrowLeft':
+                        if($left > 0) {
+                            $left -= 50
+                            $('.goku').css('left', $left+'px')
+                                      .css('transform', 'rotateY(0deg)')
+                        }
+                        break;
+                    case 'ArrowUp':
+                        if($top > 0) {
+                            $top -= 50
+                            $('.goku').css('top', $top+'px')
+                        }
+                        break;
+                    case 'ArrowRight':
+                        if($left < 200) {
+                            $left += 50
+                            $('.goku').css('left', $left+'px')
+                                      .css('transform', 'rotateY(-180deg)')
+                        }
+                        break;
+                    case 'ArrowDown':
+                        if($top < 200) {
+                            $top += 50
+                            $('.goku').css('top', $top+'px')
+                        }
+                        break;
+                }
+            })
+
+            // Change
+            $('.emoji').change(function(e) {
+                e.preventDefault()
+                $('.emotion').text($(this).val())
+            })
+        })
+    </script>
 </body>
 </html>

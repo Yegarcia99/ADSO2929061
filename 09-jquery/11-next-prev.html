@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>00- Template</title>
+    <title>11-next-prev</title>
     <link rel="stylesheet" href="../css/styles.css">
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
     <style>
     div.controls {
         margin-top: 4rem;
@@ -83,8 +85,8 @@
     </nav>
     <main>
         <header>
-            <h1>00- Template</h1>
-            <h2>Description</h2>
+            <h1>11-next-prev</h1>
+            <h2>Navega entre elementos hermanos.</h2>
             
         </header>
       <section>
@@ -125,5 +127,71 @@
     </div>
 </section>
     </main>
+    <script>
+        // 11
+$(document).ready(function () {
+            currentActive()
+            // First
+            $('.btnFirst').click(function() {
+                removeActive()
+                $('figure').first().addClass('active')
+                currentActive()
+            })
+            // Last
+            $('.btnLast').click(function() {
+                removeActive()
+                $('figure').last().addClass('active')
+                currentActive()
+            })
+            // Next
+            $('.btnNext').click(function() {
+                removeActive()
+               if($($act).index() < 4) {
+                    $($act).next().addClass('active')
+               } else {
+                    $('figure').first().addClass('active')
+               }
+                currentActive()
+            })
+            // Prev
+            $('.btnPrev').click(function() {
+                removeActive()
+               if($($act).index() > 0) {
+                    $($act).prev().addClass('active')
+               } else {
+                    $('figure').last().addClass('active')
+               }
+                currentActive()
+            })
+            // AutoPlay
+            $('.btnAutoPlay').click(function() {
+                $(this).toggleClass('autoplay')
+                if($(this).hasClass('autoplay')) {
+                    $(this).text('Stop')
+                    $autoInt = setInterval(function() {
+                        if($($act).index() < $('figure').length) {
+                            removeActive()
+                            if ($($act).index() < 4) {
+                                $($act).next().addClass('active')
+                            } else {
+                                $('figure').first().addClass('active')
+                            }
+                            currentActive()
+                        }
+                    }, 1000)
+                } else {
+                    $(this).text('Auto Play')
+                    clearInterval($autoInt)
+                }
+            })
+        })
+        // Functions
+        function currentActive() {
+            $act = $('figure.active')
+        }
+        function removeActive() {
+            $('figure').removeClass('active')
+        }
+    </script>
 </body>
 </html>

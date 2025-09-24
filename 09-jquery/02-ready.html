@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>00- Template</title>
+    <title>02-ready</title>
     <link rel="stylesheet" href="../css/styles.css">
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
     <style>
         .ready {
             background-color: #7398b8;
@@ -32,14 +34,31 @@
     </nav>
     <main>
         <header>
-            <h1>00- Template</h1>
-            <h2>Description</h2>
+            <h1>02-ready</h1>
+            <h2>Ejecuta código cuando el DOM esté completamente cargado.</h2>
 
         </header>
         <section class="section">
             <p class="ready"></p>
         </section>
     </main>
+    <script>
+        // 02
+
+// Large way
+        $(document).ready(function() {
+            $('.ready').text('DOM Loaded 💛')
+        })
+        // ShortHand
+        $(function() {
+            alert('DOM Loaded 💛')
+        })
+        // Ultra ShortHand
+        $(() => {
+            console.log('DOM Loaded 💛')
+        })
+    </script>
+    
 </body>
 
 </html>

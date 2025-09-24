@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>00- Template</title>
+    <title>09-set-get</title>
     <link rel="stylesheet" href="../css/styles.css">
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
     <style>
     section {
         textarea.text-area {
@@ -43,8 +45,8 @@
     </nav>
     <main>
         <header>
-            <h1>00- Template</h1>
-            <h2>Description</h2>
+            <h1>09-set-get</h1>
+            <h2>Establece u obtiene valores y atributos de elementos.</h2>
             
         </header>
        <section class="section">
@@ -61,5 +63,38 @@
     </div>
 </section>
     </main>
+    <script>
+        // 09
+
+$(document).ready(function () {
+            // Set
+            $('section').on('click', '.set-html', function () {
+                $('.text-area').html('<ul><li>Apple</li></ul>')
+            })
+            $('section').on('click', '.set-text', function () {
+                $('.text-area').text('Lorem ipsum dolor sit amet.')
+            })
+            $('section').on('click', '.set-attr', function () {
+                $('.text-area').attr('rows', '20')
+            })
+            $('section').on('click', '.set-value', function () {
+                $('.text-area').val('Memento Mori')
+            })
+
+            // Get
+            $('section').on('click', '.get-html', function () {
+                alert($('.actions').html())
+            })
+            $('section').on('click', '.get-text', function () {
+                alert($('header h2').text())
+            })
+            $('section').on('click', '.get-attr', function () {
+                alert($('.text-area').attr('rows'))
+            })
+            $('section').on('click', '.get-value', function () {
+                alert($('.text-area').val())
+            })
+        })
+    </script>
 </body>
 </html>

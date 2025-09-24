@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>00- Template</title>
+    <title>01-install</title>
     <link rel="stylesheet" href="../css/styles.css">
+    <script src="js/jquery-3.7.1.min.js"></script>
     <style>
     .install {
         background-color: #73b873;
@@ -32,14 +33,20 @@
     </nav>
     <main>
         <header>
-            <h1>00- Template</h1>
-            <h2>Description</h2>
+            <h1>01-install</h1>
+            <h2>Configura e incluye jQuery en tu proyecto</h2>
 
         </header>
         <section class="section">
             <p class="install"></p>
         </section>
     </main>
+   <script>
+    // 01
+$(document).ready(function() {
+            $('.install').text('✅ JQuery was Installed Succes')
+        })
+   </script>
 </body>
 
 </html>
