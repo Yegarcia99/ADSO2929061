@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12-challenge-memory-game</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <style>
+        .container {
+            background: url(images/reto/img1.png);
+            height: 812px;
+            width: 508px;
+        }
+
+        #tablero {
+            /* Crea una cuadrícula con 4 columnas */
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            gap: 10px;
+
+        }
+
+        .card {
+            /* Estilo de la carta (el reverso) */
+            width: 94px;
+            height: 136px;
+            background-color: #333;
+            /* Fondo oscuro */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 0;
+            /* Oculta el contenido al inicio */
+        }
+
+        /* Cuando jQuery añade la clase 'flipped' */
+        .card.flipped {
+            background-color: white;
+            /* Cambia el color del fondo */
+            color: #333;
+            font-size: 24px;
+            /* Muestra el contenido (el símbolo) */
+        }
+
+        /* Cuando jQuery añade la clase 'matched' (pareja encontrada) */
+        .card.matched {
+            background-color: #4CAF50;
+            /* Fondo verde */
+            cursor: default;
+        }
+    </style>
+</head>
+
+<body class="css">
+    <nav>
+        <a href="index.html">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                <path
+                    d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
+            </svg>
+
+
+        </a>
+
+    </nav>
+    <main>
+        <header>
+            <h1>12-challenge-memory-game</h1>
+            <h2>Description</h2>
+
+        </header>
+
+        <section class="container">
+            <div id="tablero">
+            </div>
+        </section>
+
+    </main>
+    <script>
+        // Archivo: game.js
+
+        $(document).ready(function () {
+
+            // --- PARTE A: DATOS Y BARAJE (JavaScript) ---
+            const cardValues = ['A', 'B', 'C', 'D', 'E', 'F'];
+            let cards = [...cardValues, ...cardValues]; // Duplicar
+
+            // Función de Barajado (necesaria para ordenar aleatoriamente)
+            const shuffle = function (array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            };
+            cards = shuffle(cards);
+
+            // --- PARTE B: CONSTRUIR EL TABLERO (jQuery) ---
+            const $tablero = $('#tablero');
+
+            // Recorre las cartas barajadas y las mete en el HTML
+            $.each(cards, function (index, value) {
+                // 'value' es el identificador (A, B, C...)
+                $tablero.append(
+                    // data-match guarda el valor oculto para la comparación
+                    '<div class="card" data-match="' + value + '">' +
+                    value +
+                    '</div>'
+                );
+            });
+
+            // --- PARTE C: MANEJAR LOS CLICS (jQuery) ---
+            let cardsFlipped = [];
+            let lockBoard = false;
+
+            // Cuando se hace clic en cualquier carta que no esté emparejada ni volteada:
+            $tablero.on('click', '.card:not(.matched):not(.flipped)', function () {
+                if (lockBoard) return;
+
+                const $card = $(this);
+                $card.addClass('flipped'); // Voltear (aplica el CSS de 'flipped')
+                cardsFlipped.push($card);
+
+                if (cardsFlipped.length === 2) {
+                    lockBoard = true; // Bloquea la interacción
+
+                    // Si los data-match son iguales, es un par
+                    if (cardsFlipped[0].data('match') === cardsFlipped[1].data('match')) {
+                        // ÉXITO: Se quedan en estado 'matched'
+                        cardsFlipped[0].addClass('matched').removeClass('flipped');
+                        cardsFlipped[1].addClass('matched').removeClass('flipped');
+                        cardsFlipped = [];
+                        lockBoard = false;
+                    } else {
+                        // FRACASO: Volver a voltear después de 1 segundo
+                        setTimeout(() => {
+                            cardsFlipped[0].removeClass('flipped');
+                            cardsFlipped[1].removeClass('flipped');
+                            cardsFlipped = [];
+                            lockBoard = false;
+                        }, 1000);
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
