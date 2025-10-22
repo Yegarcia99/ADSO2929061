@@ -1,197 +1,266 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>11-next-prev</title>
+    <title>Juego de Parejas Todo-en-Uno (jQuery)</title>
     <link rel="stylesheet" href="../css/styles.css">
-    <script src="js/jquery-3.7.1.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+
     <style>
-    div.controls {
-        margin-top: 4rem;
-        display: flex;
-        justify-content: center;
-        gap: 0.4rem;
-        align-items: center;
-        button {
-            border: none;
-            border-radius: 0.2rem;
-            background-color: #ca983b;
-            cursor: pointer;
-            padding: 0.4rem 0.8rem;
-            transition: transform 0.2s ease-in;
-            &:hover {
-                transform: scale(1.1);
-            }
-        }
-    }
-    div.cards {
-        display: flex;
-        align-items: center;
-        margin-bottom: 4rem;
-        gap: 0.8rem;
-        div.carousel {
+
+
+        /* CONTENEDOR DE JUEGO (PADRE RELATIVO) */
+        .container {
+            background: url(images/reto/img1.png) center/cover;
+            height: 800px;
+            width: 508px;
+            
+            position: relative; /* CLAVE para posicionamiento absoluto de hijos */
+            
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-            width: 300px;
-            figure {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                width: 40px;
-                margin: 0;
-                padding: 0;
-                filter: grayscale(1);
-                transition: all 0.5s ease-in;
-            }
-            figure figcaption {
-                opacity: 0;
-            }
-            figure.active {
-                filter: grayscale(0);
-                transform: scale(1.2);
-            }
-            figure.active figcaption {
-                opacity: 1;
-            }
         }
-        button {
-            border: none;
-            border-radius: 0.2rem;
-            background-color: transparent;
+
+        /* ESTILOS DEL MARCADOR (HIJO ABSOLUTO: superior derecho) */
+        #contador-wrapper {
+            position: absolute; 
+            top: 60px; 
+            right: 200px;
+            padding: 8px 12px;
+            background-color: rgba(255, 255, 255, 0.4); 
+            border-radius: 5px;
+            z-index: 10; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            font-size: 1em; 
+            color: white; 
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5); 
+        }
+
+        .stat-inline {
+            margin: 2px 0;
+            white-space: nowrap;
+        }
+        .stat-inline span {
+            font-weight: bold;
+            color: #d9534f;
+            margin-left: 5px;
+        }
+        
+        /* --- ESTILOS DEL BOTÓN DE REINICIO (DENTRO Y CENTRADO EN LA BASE) --- */
+        #restart-button {
+            position: absolute; 
+            bottom: 30px; /* Separación del fondo */
+            left: 50%; /* Mueve el punto de inicio al centro */
+            transform: translateX(-50%); /* Lo mueve hacia la izquierda la mitad de su propio ancho para centrarlo */
+            
+            width: 164; 
+            height: 164px; 
             cursor: pointer;
-            padding: 0.4rem 0.8rem;
-            transition: transform 0.2s ease-in;
-            &:hover {
-                transform: scale(1.1);
-            }
+            z-index: 10;
+            transition: transform 0.2s;
         }
-    }
-</style>
+        #restart-button:active {
+            transform: translateX(-50%) scale(0.95); /* Mantiene el centrado y aplica el efecto */
+        }
+
+        /* TABLERO Y GIRO 3D (Sin cambios) */
+        #tablero {
+            display: grid;
+            grid-template-columns: repeat(4, 94px);
+            gap: 10px;
+            perspective: 1000px;
+        }
+        .card {
+            width: 94px;
+            height: 136px;
+            cursor: pointer;
+            border-radius: 5px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+        /* ... el resto de estilos de giro 3D ... */
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 5px;
+        }
+        .card-face-front {
+            background: url(images/reto/carta0.png) center/cover;
+        }
+        .card-face-back {
+            transform: rotateY(180deg); 
+            overflow: hidden; 
+        }
+        .card.flipped {
+             transform: rotateY(180deg);
+        }
+        .card-face-back .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+            display: block; 
+        }
+        .card.matched {
+            box-shadow: 0 0 10px #4CAF50;
+        }
+    </style>
 </head>
+
 <body class="css">
     <nav>
-        <a href="index.html">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
-
-        
-        </a>
-
-    </nav>
+        </nav>
+    
     <main>
+        
         <header>
-            <h1>11-next-prev</h1>
-            <h2>Navega entre elementos hermanos.</h2>
-            
+            <h1>12-challenge-memory-game</h1>
+            <h2>Construye un juego de memoria usando jQuery.</h2>
         </header>
-      <section>
-    <div class="controls">
-        <button class="btnFirst">First</button>
-        <button class="btnAutoPlay">Auto Play</button>
-        <button class="btnLast">Last</button>
-    </div>
-    <div class="cards">
-        <button class="btnPrev">
-            <img src="images/nextprev/prev.png">
-        </button>
-        <div class="carousel">
-            <figure class="active">
-                <img src="images/nextprev/card01.png">
-                <figcaption>Goku</figcaption>
-            </figure>
-            <figure>
-                <img src="images/nextprev/card02.png">
-                <figcaption>Krillin</figcaption>
-            </figure>
-            <figure>
-                <img src="images/nextprev/card03.png">
-                <figcaption>Piccolo</figcaption>
-            </figure>
-            <figure>
-                <img src="images/nextprev/card04.png">
-                <figcaption>Trunks</figcaption>
-            </figure>
-            <figure>
-                <img src="images/nextprev/card05.png">
-                <figcaption>Tenshin</figcaption>
-            </figure>
-        </div>
-        <button class="btn btnNext">
-            <img src="images/nextprev/next.png">
-        </button>
-    </div>
-</section>
+
+        <section class="container">
+            
+            <div id="contador-wrapper">
+                <div class="stat-inline">Puntaje: <span id="score">0</span></div>
+                <div class="stat-inline">Intentos: <span id="attempts">0</span></div>
+            </div>
+            
+            <img id="restart-button" src="images/reto/restart.png" alt="Reiniciar juego">
+            
+            <div id="tablero">
+                </div>
+        </section>
     </main>
+
+
     <script>
-        // 11
-$(document).ready(function () {
-            currentActive()
-            // First
-            $('.btnFirst').click(function() {
-                removeActive()
-                $('figure').first().addClass('active')
-                currentActive()
-            })
-            // Last
-            $('.btnLast').click(function() {
-                removeActive()
-                $('figure').last().addClass('active')
-                currentActive()
-            })
-            // Next
-            $('.btnNext').click(function() {
-                removeActive()
-               if($($act).index() < 4) {
-                    $($act).next().addClass('active')
-               } else {
-                    $('figure').first().addClass('active')
-               }
-                currentActive()
-            })
-            // Prev
-            $('.btnPrev').click(function() {
-                removeActive()
-               if($($act).index() > 0) {
-                    $($act).prev().addClass('active')
-               } else {
-                    $('figure').last().addClass('active')
-               }
-                currentActive()
-            })
-            // AutoPlay
-            $('.btnAutoPlay').click(function() {
-                $(this).toggleClass('autoplay')
-                if($(this).hasClass('autoplay')) {
-                    $(this).text('Stop')
-                    $autoInt = setInterval(function() {
-                        if($($act).index() < $('figure').length) {
-                            removeActive()
-                            if ($($act).index() < 4) {
-                                $($act).next().addClass('active')
-                            } else {
-                                $('figure').first().addClass('active')
-                            }
-                            currentActive()
-                        }
-                    }, 1000)
-                } else {
-                    $(this).text('Auto Play')
-                    clearInterval($autoInt)
+        $(document).ready(function () {
+            // Variables de juego (globales dentro del ready)
+            let score = 0;
+            let attempts = 0;
+            let cardsFlipped = [];
+            let lockBoard = false;
+            let cards = [];
+            
+            const cardValues = [
+                'images/reto/carta1.png',
+                'images/reto/carta2.png',
+                'images/reto/carta3.png',
+                'images/reto/carta4.png',
+                'images/reto/carta5.png',
+                'images/reto/carta6.png'
+            ];
+
+            // Función de Barajado
+            const shuffle = function (array) {
+                let currentIndex = array.length, randomIndex;
+                while (currentIndex != 0) {
+                    randomIndex = Math.floor(Math.random() * currentIndex);
+                    currentIndex--;
+                    [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
                 }
-            })
-        })
-        // Functions
-        function currentActive() {
-            $act = $('figure.active')
-        }
-        function removeActive() {
-            $('figure').removeClass('active')
-        }
+                return array;
+            };
+
+            // Función para actualizar los marcadores
+            function updateStats() {
+                $('#score').text(score);
+                $('#attempts').text(attempts);
+            }
+
+            // Función para construir y reiniciar el tablero
+            function initGame() {
+                // 1. Resetear variables
+                score = 0;
+                attempts = 0;
+                cardsFlipped = [];
+                lockBoard = false;
+                updateStats();
+                
+                // 2. Barajar y limpiar el tablero
+                cards = [...cardValues, ...cardValues];
+                cards = shuffle(cards);
+                const $tablero = $('#tablero');
+                $tablero.empty(); // Limpia todas las cartas anteriores
+                
+                // 3. Reconstruir el tablero con las cartas barajadas
+                $.each(cards, function (index, value) {
+                    $tablero.append(
+                        '<div class="card" data-match="' + value + '">' +
+                            '<div class="card-face card-face-front"></div>' +        
+                            '<div class="card-face card-face-back">' +              
+                                '<img src="' + value + '" alt="Carta de juego" class="card-image">' +
+                            '</div>' +
+                        '</div>'
+                    );
+                });
+            }
+
+            // --- LÓGICA DE EVENTOS ---
+            
+            // Inicia el juego la primera vez
+            initGame();
+
+            // Evento de clic en el tablero
+            $('#tablero').on('click', '.card:not(.matched):not(.flipped)', function () {
+
+                if (lockBoard) return;
+
+                const $card = $(this);
+                $card.addClass('flipped');
+                cardsFlipped.push($card);
+
+                if (cardsFlipped.length === 2) {
+                    lockBoard = true;
+                    attempts++; 
+
+                    if (cardsFlipped[0].data('match') === cardsFlipped[1].data('match')) {
+                        // Éxito
+                        score += 10; 
+                        cardsFlipped[0].addClass('matched'); 
+                        cardsFlipped[1].addClass('matched');
+                        
+                        cardsFlipped = [];
+                        lockBoard = false;
+
+                        if ($('.card:not(.matched)').length === 0) {
+                            setTimeout(() => { 
+                                updateStats();
+                                alert(`¡Felicidades! Ganaste con ${score} puntos en ${attempts} intentos.`); 
+                            }, 600);
+                        }
+                    } else {
+                        // Fracaso
+                        setTimeout(() => {
+                            cardsFlipped[0].removeClass('flipped');
+                            cardsFlipped[1].removeClass('flipped');
+                            
+                            cardsFlipped = [];
+                            lockBoard = false;
+                        }, 1200); 
+                    }
+                    
+                    updateStats(); 
+                }
+            });
+            
+            // Evento de clic en el botón de reinicio
+            $('#restart-button').on('click', function() {
+                if (confirm('¿Estás seguro de que quieres reiniciar el juego?')) {
+                    initGame();
+                }
+            });
+            
+        });
     </script>
 </body>
+
 </html>
